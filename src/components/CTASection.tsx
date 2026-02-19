@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const CTASection = () => {
   return (
-    <section id="contato" className="py-24 bg-primary relative overflow-hidden">
+    <section className="py-24 bg-primary relative overflow-hidden">
       {/* Decorative circles */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary-foreground/5 rounded-full -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-foreground/5 rounded-full translate-y-1/2 -translate-x-1/2" />
