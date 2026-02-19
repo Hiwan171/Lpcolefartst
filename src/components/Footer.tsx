@@ -15,7 +15,7 @@ const Footer = () => {
     cpfCnpj: "",
     razaoSocial: "",
     telefone: "",
-    mensagem: "",
+    mensagem: ""
   });
   const [sending, setSending] = useState(false);
 
@@ -38,59 +38,59 @@ const Footer = () => {
   };
 
   const contactInfo = [
-    { icon: Phone, text: "(31) 3434-7565" },
-    { icon: Mail, text: "suporte@colefar.com" },
-    {
-      icon: Clock,
-      text: "Segunda a sexta-feira, das 08h00 às 17h45",
-      sub: "Logística, Comercial, Transporte, Compras, Manutenção, Faturamento, Recursos Humanos e SAC.",
-    },
-    { icon: MapPin, text: "Rua Governador Milton Campos, 1154", sub: "Tupi – Belo Horizonte/MG" },
-  ];
+  { icon: Phone, text: "(31) 3434-7565" },
+  { icon: Mail, text: "suporte@colefar.com" },
+  {
+    icon: Clock,
+    text: "Segunda a sexta-feira, das 08h00 às 17h45",
+    sub: "Logística, Comercial, Transporte, Compras, Manutenção, Faturamento, Recursos Humanos e SAC."
+  },
+  { icon: MapPin, text: "Rua Governador Milton Campos, 1154", sub: "Tupi – Belo Horizonte/MG" }];
+
 
   return (
-    <footer id="contato" className="bg-muted">
+    <footer id="contato" className="bg-muted border-primary-foreground">
       {/* Contact section */}
-      <div className="container mx-auto px-4 py-20">
+      <div className="container mx-auto px-4 py-20 bg-primary-dark">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           {/* Left - Contact Info */}
           <div className="lg:w-5/12 flex flex-col">
-            <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-foreground mb-2">
+            <h2 className="text-3xl font-heading font-extrabold text-foreground mb-2 sm:text-5xl">
               Fale conosco
             </h2>
-            <p className="text-muted-foreground mb-8">
+            <p className="mb-8 text-gray-950 text-lg">
               Entre em contato conosco para dúvidas, sugestões ou suporte técnico.
             </p>
 
             <div className="space-y-5 flex-1">
-              {contactInfo.map((item, i) => (
-                <div key={i} className="flex items-start gap-4">
+              {contactInfo.map((item, i) =>
+              <div key={i} className="gap-4 flex items-start justify-start">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-foreground font-medium text-sm">{item.text}</p>
-                    {item.sub && (
-                      <p className="text-muted-foreground text-xs mt-0.5">{item.sub}</p>
-                    )}
+                    <p className="text-foreground font-medium text-base">{item.text}</p>
+                    {item.sub &&
+                  <p className="text-muted-foreground text-xs mt-0.5">{item.sub}</p>
+                  }
                   </div>
                 </div>
-              ))}
+              )}
             </div>
 
             {/* Social */}
             <div className="flex gap-3 mt-8">
-              {[Facebook, Instagram, Linkedin].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:bg-primary-dark transition-colors"
-                >
+              {[Facebook, Instagram, Linkedin].map((Icon, i) =>
+              <a
+                key={i}
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground hover:bg-primary-dark transition-colors">
+
                   <Icon className="w-4 h-4" />
                 </a>
-              ))}
+              )}
             </div>
           </div>
 
@@ -141,8 +141,8 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 };
 
 export default Footer;
