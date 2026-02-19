@@ -3,13 +3,13 @@ import { CheckCircle2 } from "lucide-react";
 import aboutImg from "@/assets/about-colefar.jpg";
 
 const highlights = [
-  "Licenças ambientais atualizadas",
-  "Veículos rastreados por GPS",
-  "Equipe certificada em segurança",
-  "Emissão de CDF para cada coleta",
-  "Atendimento em todo o estado",
-  "Mais de 10 anos de experiência",
-];
+"Licenças ambientais atualizadas",
+"Veículos rastreados por GPS",
+"Equipe certificada em segurança",
+"Emissão de CDF para cada coleta",
+"Atendimento em todo o estado",
+"Mais de 10 anos de experiência"];
+
 
 const AboutSection = () => {
   return (
@@ -22,29 +22,29 @@ const AboutSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative"
-          >
+            className="relative">
+
             <div className="rounded-2xl overflow-hidden shadow-elevated">
               <img
                 src={aboutImg}
                 alt="Profissional COLEFAR em operação"
-                className="w-full h-[450px] object-cover"
-              />
+                className="w-full h-[450px] object-cover" />
+
             </div>
             {/* Floating stat card */}
             <div className="absolute -bottom-6 -right-4 bg-primary rounded-xl p-6 shadow-elevated">
-              <p className="text-4xl font-heading font-extrabold text-primary-foreground">+500</p>
+              <p className="text-4xl font-heading font-extrabold text-primary-foreground">+2000
+
+              </p>
               <p className="text-primary-foreground/80 text-sm mt-1">Empresas atendidas</p>
             </div>
           </motion.div>
 
           {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}>
+
             <span className="text-sm font-semibold text-primary uppercase tracking-widest">
               Sobre a COLEFAR
             </span>
@@ -59,18 +59,18 @@ const AboutSection = () => {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {highlights.map((item) => (
-                <div key={item} className="flex items-center gap-3">
+              {highlights.map((item) =>
+              <div key={item} className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
                   <span className="text-sm font-medium text-foreground">{item}</span>
                 </div>
-              ))}
+              )}
             </div>
           </motion.div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default AboutSection;
