@@ -49,27 +49,27 @@ const Footer = () => {
 
 
   return (
-    <footer id="contato" className="bg-muted border-primary-foreground">
+    <footer id="contato" className="bg-muted">
       {/* Contact section */}
-      <div className="container mx-auto px-4 py-20 bg-primary-dark">
+      <div className="container mx-auto px-4 py-20 bg-muted">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           {/* Left - Contact Info */}
           <div className="lg:w-5/12 flex flex-col">
-            <h2 className="text-3xl font-heading font-extrabold text-foreground mb-2 sm:text-5xl">
+            <h2 className="text-3xl sm:text-4xl font-heading font-extrabold text-foreground mb-2">
               Fale conosco
             </h2>
-            <p className="mb-8 text-gray-950 text-lg">
+            <p className="text-muted-foreground mb-8">
               Entre em contato conosco para dúvidas, sugestões ou suporte técnico.
             </p>
 
             <div className="space-y-5 flex-1">
               {contactInfo.map((item, i) =>
-              <div key={i} className="gap-4 flex items-start justify-start">
+              <div key={i} className="flex items-start gap-4">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-foreground font-medium text-base">{item.text}</p>
+                    <p className="text-foreground font-medium text-sm">{item.text}</p>
                     {item.sub &&
                   <p className="text-muted-foreground text-xs mt-0.5">{item.sub}</p>
                   }
