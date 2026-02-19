@@ -112,3 +112,18 @@
     box-shadow: var(--shadow-elevated);
   }
 }
+
+@layer utilities {
+  .animate-partners-marquee {
+    animation: partners-marquee 28s linear infinite;
+  }
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
