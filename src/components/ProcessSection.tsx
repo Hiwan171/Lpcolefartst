@@ -39,7 +39,7 @@ const ProcessSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest">
+          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary bg-secondary px-3 py-1 rounded-full">
             Processo
           </span>
           <h2 className="text-3xl sm:text-4xl font-heading font-bold text-foreground mt-3">
