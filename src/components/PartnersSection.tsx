@@ -2,15 +2,38 @@ import { Building2 } from "lucide-react";
 
 type Partner = {
   name: string;
-  logo: string;
+  logos: string[];
 };
 
 const partners: Partner[] = [
-  { name: "Stellantis", logo: "/partners/stellantis.png" },
-  { name: "Grupo Zelo", logo: "/partners/grupo-zelo.png" },
-  { name: "Drogaria Araujo", logo: "/partners/drogaria-araujo.png" },
-  { name: "Universidade Federal de São João del-Rei", logo: "/partners/ufsj.png" },
-  { name: "Atletico MG", logo: "/partners/atletico-mg.png" },
+  {
+    name: "Drogaria Araujo",
+    logos: ["/Partners/araujo.png", "/partners/araujo.png", "/partners/drogaria-araujo.svg"],
+  },
+  {
+    name: "CAM",
+    logos: ["/Partners/cam.png", "/partners/cam.png", "/partners/atletico-mg.svg"],
+  },
+  {
+    name: "Fiat",
+    logos: ["/Partners/fiat.png", "/partners/fiat.png", "/partners/stellantis.svg"],
+  },
+  {
+    name: "Stellantis",
+    logos: ["/Partners/stellantis.png", "/partners/stellantis.png", "/partners/stellantis.svg"],
+  },
+  {
+    name: "UFSJ",
+    logos: ["/Partners/ufsj.png", "/partners/ufsj.png", "/partners/ufsj.svg"],
+  },
+  {
+    name: "UFTM",
+    logos: ["/Partners/UFTM.png", "/partners/UFTM.png", "/partners/ufsj.svg"],
+  },
+  {
+    name: "Grupo Zelo",
+    logos: ["/Partners/zelo.png", "/partners/zelo.png", "/partners/grupo-zelo.svg"],
+  },
 ];
 
 const marqueeItems = [...partners, ...partners];
@@ -38,13 +61,17 @@ const PartnersSection = () => {
                 title={partner.name}
               >
                 <img
-                  src={partner.logo}
+                  src={partner.logos[0]}
                   alt={`Logo ${partner.name}`}
                   loading="lazy"
+                  data-fallback-index="0"
                   onError={(event) => {
                     const image = event.currentTarget;
-                    if (image.src.endsWith(".png")) {
-                      image.src = image.src.replace(/\.png$/, ".svg");
+                    const currentIndex = Number(image.dataset.fallbackIndex ?? "0");
+                    const nextIndex = currentIndex + 1;
+                    if (nextIndex < partner.logos.length) {
+                      image.dataset.fallbackIndex = String(nextIndex);
+                      image.src = partner.logos[nextIndex];
                     }
                   }}
                   className="max-h-10 w-auto object-contain"
