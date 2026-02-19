@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoColefar from "@/assets/logo-colefar.png";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { label: "Início", href: "#inicio" },
@@ -33,7 +33,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between h-20 px-4">
         <a href="#inicio">
-          <img src={logoColefar} alt="COLEFAR" className="h-12 object-contain" />
+          <Logo variant={scrolled ? "dark" : "light"} />
         </a>
 
         {/* Desktop */}
