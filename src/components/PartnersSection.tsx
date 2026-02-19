@@ -6,11 +6,11 @@ type Partner = {
 };
 
 const partners: Partner[] = [
-  { name: "Stellantis", logo: "/partners/stellantis.svg" },
-  { name: "Grupo Zelo", logo: "/partners/grupo-zelo.svg" },
-  { name: "Drogaria Araujo", logo: "/partners/drogaria-araujo.svg" },
-  { name: "Universidade Federal de São João del-Rei", logo: "/partners/ufsj.svg" },
-  { name: "Atletico MG", logo: "/partners/atletico-mg.svg" },
+  { name: "Stellantis", logo: "/partners/stellantis.png" },
+  { name: "Grupo Zelo", logo: "/partners/grupo-zelo.png" },
+  { name: "Drogaria Araujo", logo: "/partners/drogaria-araujo.png" },
+  { name: "Universidade Federal de São João del-Rei", logo: "/partners/ufsj.png" },
+  { name: "Atletico MG", logo: "/partners/atletico-mg.png" },
 ];
 
 const marqueeItems = [...partners, ...partners];
@@ -41,6 +41,12 @@ const PartnersSection = () => {
                   src={partner.logo}
                   alt={`Logo ${partner.name}`}
                   loading="lazy"
+                  onError={(event) => {
+                    const image = event.currentTarget;
+                    if (image.src.endsWith(".png")) {
+                      image.src = image.src.replace(/\.png$/, ".svg");
+                    }
+                  }}
                   className="max-h-10 w-auto object-contain"
                 />
               </div>
