@@ -1,102 +1,86 @@
 import { motion } from "framer-motion";
-import { ClipboardList, Truck, Factory, FileCheck, ArrowUpRight } from "lucide-react";
+import { ClipboardList, Factory, FileCheck, Truck } from "lucide-react";
 
 const steps = [
   {
-    icon: ClipboardList,
     step: "01",
-    title: "Solicitação e Diagnóstico",
-    description: "Você entra em contato e nossa equipe realiza uma análise detalhada dos resíduos a serem coletados.",
+    icon: ClipboardList,
+    title: "Diagnostico inicial",
+    description: "Mapeamento do tipo de resíduo, volume e frequencia para definir o plano de coleta ideal.",
   },
   {
-    icon: Truck,
     step: "02",
-    title: "Coleta Especializada",
-    description: "Equipe treinada e veículos licenciados fazem a coleta no seu local, seguindo todas as normas de segurança.",
+    icon: Truck,
+    title: "Coleta e transporte",
+    description: "Equipe treinada e veiculos licenciados executam a coleta conforme requisitos legais.",
   },
   {
-    icon: Factory,
     step: "03",
-    title: "Tratamento e Destinação",
-    description: "Os resíduos são encaminhados para unidades de tratamento licenciadas, garantindo a destinação final correta.",
+    icon: Factory,
+    title: "Tratamento e destinacao",
+    description: "Encaminhamento para unidades homologadas com rastreabilidade completa do processo.",
   },
   {
-    icon: FileCheck,
     step: "04",
-    title: "Certificado de Destinação",
-    description: "Você recebe o Certificado de Destinação Final (CDF) comprovando a conformidade ambiental do processo.",
+    icon: FileCheck,
+    title: "Emissao de CDF",
+    description: "Entrega de comprovacao formal de destinacao final para conformidade ambiental da empresa.",
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1 },
-  }),
-};
-
 const ProcessSection = () => {
   return (
-    <section id="processo" className="relative overflow-hidden bg-background py-24">
+    <section id="processo" className="relative overflow-hidden bg-muted py-24">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute right-0 top-16 h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-accent/15 blur-2xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(255,255,255,0.5),rgba(255,255,255,0.02)_45%,rgba(20,94,57,0.08))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(15,22,30,0.84),rgba(11,19,28,0.34)_45%,rgba(12,24,17,0.7))]" />
+        <div className="absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-primary/16 blur-[150px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto mb-16 max-w-3xl text-center"
+          transition={{ duration: 0.45 }}
+          className="mx-auto mb-14 max-w-3xl text-center"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-secondary/80 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary shadow-sm shadow-primary/10">
-            <ClipboardList className="h-3.5 w-3.5" />
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/78">
             Processo
           </span>
-          <h2 className="mt-4 text-3xl font-heading font-bold text-foreground sm:text-4xl">
-            Como Funciona Nossa Coleta
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Um processo simples, seguro e totalmente documentado para sua tranquilidade.
+          <h2 className="mt-4 text-3xl font-bold text-primary-foreground sm:text-4xl">Como funciona a operacao</h2>
+          <p className="mt-4 text-sm leading-relaxed text-primary-foreground/68 sm:text-base">
+            Fluxo objetivo para acelerar sua coleta com seguranca juridica e ambiental.
           </p>
-          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-accent via-primary/70 to-primary" />
         </motion.div>
 
         <div className="relative">
-          <div className="pointer-events-none absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent xl:block" />
+          <div className="pointer-events-none absolute left-6 top-8 h-[calc(100%-4rem)] w-px bg-gradient-to-b from-primary/55 via-accent/40 to-transparent sm:left-1/2 sm:-translate-x-1/2" />
 
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4">
-            {steps.map((step, i) => (
+          <div className="space-y-5">
+            {steps.map((step, index) => (
               <motion.article
                 key={step.step}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                variants={fadeUp}
-              className="group relative overflow-hidden rounded-2xl border border-primary/12 bg-background/80 p-6 shadow-card backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/35 hover:shadow-elevated"
+                transition={{ duration: 0.42, delay: index * 0.06 }}
+                className={`relative grid items-center gap-5 rounded-2xl border border-white/12 bg-white/[0.04] p-6 backdrop-blur-sm sm:grid-cols-[1fr_auto_1fr] ${
+                  index % 2 === 0 ? "" : "sm:[&>*:first-child]:order-3 sm:[&>*:last-child]:order-1"
+                }`}
               >
-                <div className="pointer-events-none absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-accent via-primary/60 to-primary opacity-80" />
-                <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 blur-2xl transition-all duration-300 group-hover:bg-primary/20" />
+                <div className="hidden sm:block" />
 
-                <div className="mb-4 flex items-center justify-between">
-                  <span className="rounded-full border border-primary/20 bg-secondary/70 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-primary">
+                <div className="relative z-10 inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/35 bg-accent/10 text-accent sm:mx-auto">
+                  <step.icon className="h-5 w-5" />
+                </div>
+
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/55">
                     Etapa {step.step}
-                  </span>
-                  <ArrowUpRight className="h-[18px] w-[18px] text-primary/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
+                  </p>
+                  <h3 className="mt-2 text-xl font-semibold text-primary-foreground">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-primary-foreground/65">{step.description}</p>
                 </div>
-
-                <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl border border-primary/20 bg-secondary/90 text-primary transition-all duration-300 group-hover:scale-105 group-hover:border-primary/35 group-hover:bg-primary group-hover:text-primary-foreground">
-                  <step.icon className="h-6 w-6" />
-                </div>
-
-                <h3 className="mb-2 text-lg font-heading font-bold text-foreground">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
               </motion.article>
             ))}
           </div>
