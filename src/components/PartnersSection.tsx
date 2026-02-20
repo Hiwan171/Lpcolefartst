@@ -2,54 +2,39 @@ import { Building2 } from "lucide-react";
 
 type Partner = {
   name: string;
-  logos: string[];
+  logo: string;
 };
 
 const partners: Partner[] = [
-  {
-    name: "Drogaria Araujo",
-    logos: ["/Partners/araujo.png", "/partners/araujo.png", "/partners/drogaria-araujo.svg"],
-  },
-  {
-    name: "CAM",
-    logos: ["/Partners/cam.png", "/partners/cam.png", "/partners/atletico-mg.svg"],
-  },
-  {
-    name: "Fiat",
-    logos: ["/Partners/fiat.png", "/partners/fiat.png", "/partners/stellantis.svg"],
-  },
-  {
-    name: "Stellantis",
-    logos: ["/Partners/stellantis.png", "/partners/stellantis.png", "/partners/stellantis.svg"],
-  },
-  {
-    name: "UFSJ",
-    logos: ["/Partners/ufsj.png", "/partners/ufsj.png", "/partners/ufsj.svg"],
-  },
-  {
-    name: "UFTM",
-    logos: ["/Partners/UFTM.png", "/partners/UFTM.png", "/partners/ufsj.svg"],
-  },
-  {
-    name: "Grupo Zelo",
-    logos: ["/Partners/zelo.png", "/partners/zelo.png", "/partners/grupo-zelo.svg"],
-  },
+  { name: "Stellantis", logo: "/Partners/stellantis.png" },
+  { name: "Grupo Zelo", logo: "/Partners/zelo.png" },
+  { name: "Drogaria Araujo", logo: "/Partners/araujo.png" },
+  { name: "Universidade Federal de São João del-Rei", logo: "/Partners/ufsj.png" },
+  { name: "Atletico MG", logo: "/Partners/cam.png" },
+  { name: "Fiat", logo: "/Partners/fiat.png" },
+  { name: "UFTM", logo: "/Partners/UFTM.png" },
 ];
 
 const marqueeItems = [...partners, ...partners];
 
 const PartnersSection = () => {
   return (
-    <section className="py-12 bg-background border-y border-border/80">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-6">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary bg-secondary px-3 py-1 rounded-full">
+    <section className="relative overflow-hidden border-y border-border/80 bg-background py-12">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-accent/15 blur-2xl" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mb-6 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/80 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary shadow-sm shadow-primary/10 backdrop-blur-sm">
             <Building2 className="w-3.5 h-3.5" />
             Empresas parceiras
           </span>
           <h3 className="mt-3 text-xl sm:text-2xl font-heading font-bold text-foreground">
             Marcas que atendemos
           </h3>
+          <div className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-accent via-primary/70 to-primary" />
         </div>
 
         <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
@@ -57,24 +42,20 @@ const PartnersSection = () => {
             {marqueeItems.map((partner, index) => (
               <div
                 key={`${partner.name}-${index}`}
-                className="h-20 w-52 rounded-xl border border-border bg-card px-4 flex items-center justify-center shadow-card"
+                className="flex h-20 w-52 items-center justify-center rounded-xl border border-primary/12 bg-background/80 px-4 shadow-card backdrop-blur-sm transition-colors duration-300 hover:border-primary/30"
                 title={partner.name}
               >
                 <img
-                  src={partner.logos[0]}
+                  src={partner.logo}
                   alt={`Logo ${partner.name}`}
                   loading="lazy"
-                  data-fallback-index="0"
                   onError={(event) => {
                     const image = event.currentTarget;
-                    const currentIndex = Number(image.dataset.fallbackIndex ?? "0");
-                    const nextIndex = currentIndex + 1;
-                    if (nextIndex < partner.logos.length) {
-                      image.dataset.fallbackIndex = String(nextIndex);
-                      image.src = partner.logos[nextIndex];
+                    if (image.src.endsWith(".png")) {
+                      image.src = image.src.replace(/\.png$/, ".svg");
                     }
                   }}
-                  className="max-h-10 w-auto object-contain"
+                  className="max-h-14 w-auto object-contain"
                 />
               </div>
             ))}

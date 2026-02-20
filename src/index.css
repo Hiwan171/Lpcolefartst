@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,10 +6,10 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 145 20% 98%;
     --foreground: 150 20% 10%;
 
-    --card: 0 0% 100%;
+    --card: 145 28% 99%;
     --card-foreground: 150 20% 10%;
 
     --popover: 0 0% 100%;
@@ -21,7 +21,7 @@
     --secondary: 145 30% 95%;
     --secondary-foreground: 145 63% 22%;
 
-    --muted: 140 15% 95%;
+    --muted: 142 18% 94%;
     --muted-foreground: 150 10% 45%;
 
     --accent: 80 60% 50%;
@@ -30,8 +30,8 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 140 15% 88%;
-    --input: 140 15% 88%;
+    --border: 142 16% 86%;
+    --input: 142 16% 86%;
     --ring: 145 63% 22%;
 
     --radius: 0.75rem;
@@ -53,6 +53,7 @@
     --gradient-primary: linear-gradient(135deg, hsl(145 63% 22%), hsl(145 70% 16%));
     --gradient-hero: linear-gradient(180deg, hsl(145 70% 16% / 0.92), hsl(145 63% 22% / 0.85));
     --gradient-cta: linear-gradient(135deg, hsl(80 60% 50%), hsl(145 63% 22%));
+    --gradient-surface: linear-gradient(180deg, hsl(145 24% 98%), hsl(142 18% 95%));
     --shadow-card: 0 4px 24px -4px hsl(145 63% 22% / 0.08);
     --shadow-elevated: 0 12px 40px -8px hsl(145 63% 22% / 0.15);
   }
@@ -104,12 +105,29 @@
     background: var(--gradient-hero);
   }
 
+  .bg-surface-blend {
+    background: var(--gradient-surface);
+  }
+
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
 
   .shadow-elevated {
     box-shadow: var(--shadow-elevated);
+  }
+
+  .animate-partners-marquee {
+    animation: partners-marquee 16s linear infinite;
+  }
+}
+
+@keyframes partners-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 

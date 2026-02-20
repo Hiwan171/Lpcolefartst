@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Mail, MapPin, Send } from "lucide-react";
+import {
+  ArrowRight,
+  Phone,
+  Mail,
+  MapPin,
+  Send,
+  Clock3,
+  MessageCircleMore,
+  FileEdit,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -88,6 +97,7 @@ const CTASection = () => {
       value: `${CONTACT.addressLine1} - ${CONTACT.addressLine2}`,
       href: MAPS_LINK,
     },
+    { icon: Clock3, label: "Horário", value: "Segunda a sexta, 8h às 17h45" },
   ];
 
   return (
@@ -104,7 +114,11 @@ const CTASection = () => {
             className="space-y-5"
           >
             <div>
-              <h2 className="text-2xl sm:text-3xl font-heading font-bold text-primary-foreground leading-tight">
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-widest uppercase text-primary bg-primary-foreground px-3 py-1 rounded-full">
+                <MessageCircleMore className="w-3.5 h-3.5" />
+                Contato rapido
+              </span>
+              <h2 className="mt-3 text-2xl sm:text-3xl font-heading font-bold text-primary-foreground leading-tight">
                 Coleta de resíduos perigoso com atendimento rápido
               </h2>
               <p className="text-primary-foreground/80 text-sm sm:text-base mt-2 max-w-xl">
@@ -130,14 +144,18 @@ const CTASection = () => {
                   </div>
                   <div>
                     <p className="text-primary-foreground/60 text-[11px] uppercase tracking-wide">{info.label}</p>
-                    <a
-                      href={info.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary-foreground text-sm font-medium hover:underline leading-snug"
-                    >
-                      {info.value}
-                    </a>
+                    {info.href ? (
+                      <a
+                        href={info.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-primary-foreground text-sm font-medium hover:underline leading-snug"
+                      >
+                        {info.value}
+                      </a>
+                    ) : (
+                      <p className="text-primary-foreground text-sm font-medium leading-snug">{info.value}</p>
+                    )}
                   </div>
                 </div>
               ))}
@@ -152,6 +170,13 @@ const CTASection = () => {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="bg-card rounded-xl p-4 sm:p-5 shadow-card border border-border"
           >
+            <div className="mb-3.5">
+              <span className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-widest uppercase text-primary bg-primary/10 px-3 py-1 rounded-full">
+                <FileEdit className="w-3.5 h-3.5" />
+                Formulario de contato
+              </span>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <Label htmlFor="nome" className="text-xs font-semibold text-foreground/90">Nome *</Label>

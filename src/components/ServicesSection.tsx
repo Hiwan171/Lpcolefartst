@@ -1,5 +1,14 @@
 import { motion } from "framer-motion";
-import { FlaskConical, Droplets, Pill, Battery, Paintbrush, Package } from "lucide-react";
+import {
+  FlaskConical,
+  Droplets,
+  Pill,
+  Battery,
+  Paintbrush,
+  Package,
+  ShieldCheck,
+  ArrowUpRight,
+} from "lucide-react";
 
 const services = [
   {
@@ -45,28 +54,36 @@ const fadeUp = {
 
 const ServicesSection = () => {
   return (
-    <section id="servicos" className="py-24 bg-muted">
-      <div className="container mx-auto px-4">
+    <section id="servicos" className="relative overflow-hidden py-24 bg-muted">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-0 h-[380px] w-[780px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-accent/15 blur-2xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(255,255,255,0.55),rgba(255,255,255,0.05)_45%,rgba(20,94,57,0.08))]" />
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="mx-auto mb-16 max-w-3xl text-center"
         >
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-primary bg-white px-3 py-1 rounded-full">
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-background/80 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary shadow-sm shadow-primary/10 backdrop-blur-sm">
+            <ShieldCheck className="h-3.5 w-3.5" />
             Nossos Serviços
           </span>
-          <h2 className="text-3xl sm:text-4xl font-heading font-bold text-foreground mt-3">
+          <h2 className="mt-4 text-3xl font-heading font-bold text-foreground sm:text-4xl">
             Tipos de Resíduos que Coletamos
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
             Atendemos todos os tipos de resíduos perigosos classificados pela ABNT NBR 10004,
             exceto materiais radioativos.
           </p>
+          <div className="mx-auto mt-6 h-1 w-24 rounded-full bg-gradient-to-r from-accent via-primary/70 to-primary" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -75,13 +92,20 @@ const ServicesSection = () => {
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
-              className="group bg-card rounded-lg p-8 shadow-card hover:shadow-elevated transition-all duration-300 border border-border hover:border-primary/30"
+              className="group relative overflow-hidden rounded-2xl border border-primary/12 bg-background/80 p-7 shadow-card backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/35 hover:shadow-elevated"
             >
-              <div className="w-14 h-14 rounded-lg bg-secondary flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+              <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/10 blur-2xl transition-all duration-300 group-hover:bg-primary/20" />
+              <div className="pointer-events-none absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-accent via-primary/60 to-primary opacity-80" />
+
+              <div className="mb-5 flex items-start justify-between gap-4">
+                <div className="relative inline-flex h-14 w-14 items-center justify-center rounded-xl border border-primary/20 bg-secondary/90 text-primary shadow-inner shadow-white/60 transition-all duration-300 group-hover:scale-105 group-hover:border-primary/35 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <service.icon className="h-6 w-6 transition-colors duration-300" />
+                </div>
+                <ArrowUpRight className="h-5 w-5 text-primary/40 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
               </div>
-              <h3 className="text-lg font-heading font-bold text-foreground mb-2">{service.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+
+              <h3 className="mb-2 text-lg font-heading font-bold text-foreground">{service.title}</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{service.description}</p>
             </motion.div>
           ))}
         </div>
