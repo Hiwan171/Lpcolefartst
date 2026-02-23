@@ -1,34 +1,8 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock3, Mail, MapPin, Phone, Send, ShieldCheck } from "lucide-react";
+import { ArrowRight, Clock3, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { CONTACT, MAPS_LINK, sendContactFormEmail } from "@/lib/contact";
-
-type FormState = {
-  nome: string;
-  email: string;
-  cpfCnpj: string;
-  razaoSocial: string;
-  telefone: string;
-  clientType: "Pessoa Fisica" | "Pessoa Juridica" | "";
-  residueType: string;
-  mensagem: string;
-};
-
-const initialForm: FormState = {
-  nome: "",
-  email: "",
-  cpfCnpj: "",
-  razaoSocial: "",
-  telefone: "",
-  clientType: "",
-  residueType: "",
-  mensagem: "",
-};
+import { CONTACT, MAPS_LINK } from "@/lib/contact";
+import { openContactModal } from "@/lib/contact-modal";
 
 const contactInfo = [
   { icon: Phone, label: "Telefone", value: CONTACT.phoneDisplay, href: `tel:${CONTACT.phoneRaw}` },
@@ -43,47 +17,6 @@ const contactInfo = [
 ];
 
 const CTASection = () => {
-  const { toast } = useToast();
-  const [form, setForm] = useState<FormState>(initialForm);
-  const [sending, setSending] = useState(false);
-
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
-    setForm((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!form.nome.trim() || !form.email.trim() || !form.telefone.trim() || !form.residueType) {
-      toast({
-        title: "Preencha os campos obrigatorios",
-        description: "Nome, e-mail, telefone e tipo de residuo sao essenciais para o orcamento.",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    setSending(true);
-    try {
-      await sendContactFormEmail(form);
-      toast({
-        title: "Solicitacao enviada",
-        description: "Recebemos seu contato e vamos responder por e-mail.",
-      });
-      setForm(initialForm);
-    } catch {
-      toast({
-        title: "Falha ao enviar",
-        description: "Nao foi possivel enviar agora. Tente novamente em alguns minutos.",
-        variant: "destructive",
-      });
-    } finally {
-      setSending(false);
-    }
-  };
-
   return (
     <section id="contato" className="relative overflow-hidden py-24">
       <div className="pointer-events-none absolute inset-0">
@@ -93,34 +26,47 @@ const CTASection = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45 }}
-            className="rounded-3xl border border-white/12 bg-white/[0.05] p-6 backdrop-blur-xl sm:p-8"
+            className="w-full rounded-3xl border border-white/12 bg-white/[0.05] p-6 text-center backdrop-blur-xl sm:p-8"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
               <ShieldCheck className="h-3.5 w-3.5" />
-              Fale com nosso time tecnico
+              Time tecnico-comercial
             </span>
 
             <h2 className="mt-4 text-3xl font-bold leading-tight text-primary-foreground sm:text-4xl">
-              Vamos montar sua estrategia de coleta agora
+              Receba sua proposta e inicie sua coleta ainda hoje
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-primary-foreground/70 sm:text-base">
-              Informe os dados da operacao e retornamos com orientacao tecnica, janela de coleta e condicoes para iniciar.
+              Cada dia sem destinacao correta aumenta risco de autuacao e gargalo interno. Clique abaixo e abra o
+              formulario para receber orientacao pratica e comecar rapido.
             </p>
 
-            <Button variant="cta" size="lg" className="mt-6 h-12 rounded-full px-7 text-sm sm:text-base" asChild>
-              <a href={`https://wa.me/${CONTACT.whatsappRaw}`} target="_blank" rel="noopener noreferrer">
-                Falar no WhatsApp
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </Button>
+            <div className="mt-5 rounded-2xl border border-white/12 bg-background/55 p-4">
+              <p className="text-sm font-semibold text-primary-foreground">O que voce recebe no primeiro contato:</p>
+              <ul className="mt-3 space-y-2 text-sm text-primary-foreground/78">
+                <li>- enquadramento tecnico do residuo</li>
+                <li>- sugestao de frequencia de coleta</li>
+                <li>- orientacao documental para iniciar</li>
+              </ul>
+            </div>
 
-            <div className="mt-7 space-y-3">
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button variant="cta" size="lg" className="h-12 rounded-full px-7 text-sm sm:text-base" onClick={openContactModal}>
+                Abrir formulario de proposta
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+              <Button variant="hero-outline" size="lg" className="h-12 rounded-full px-7 text-sm sm:text-base" asChild>
+                <a href={`tel:${CONTACT.phoneRaw}`}>Ligar agora</a>
+              </Button>
+            </div>
+
+            <div className="mt-7 space-y-3 text-left">
               {contactInfo.map((info) => (
                 <div key={info.label} className="flex items-start gap-3 rounded-xl border border-white/10 bg-background/55 p-3">
                   <div className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-accent/35 bg-accent/10 text-accent">
@@ -147,126 +93,24 @@ const CTASection = () => {
             </div>
           </motion.div>
 
-          <motion.form
-            onSubmit={handleSubmit}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="rounded-3xl border border-white/15 bg-background/85 p-6 shadow-elevated sm:p-8"
+            className="w-full rounded-3xl border border-white/15 bg-background/85 p-6 text-center shadow-elevated sm:p-8"
           >
-            <div className="mb-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Formulario de contato</p>
-              <h3 className="mt-2 text-2xl font-bold text-foreground">Solicite um retorno especializado</h3>
-            </div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">Formulario suspenso</p>
+            <h3 className="mt-2 text-2xl font-bold text-foreground">Abra o formulario sem sair da pagina</h3>
+            <p className="mt-2 text-sm text-foreground/70">
+              Ao clicar em qualquer botao de contato, o formulario abre em modal sobre a landing.
+            </p>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="nome" className="text-xs font-semibold text-foreground/90">
-                  Nome *
-                </Label>
-                <Input id="nome" name="nome" value={form.nome} onChange={handleChange} className="mt-1 h-10" />
-              </div>
-
-              <div>
-                <Label htmlFor="email" className="text-xs font-semibold text-foreground/90">
-                  E-mail *
-                </Label>
-                <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} className="mt-1 h-10" />
-              </div>
-
-              <div>
-                <Label htmlFor="cpfCnpj" className="text-xs font-semibold text-foreground/90">
-                  CPF / CNPJ
-                </Label>
-                <Input
-                  id="cpfCnpj"
-                  name="cpfCnpj"
-                  value={form.cpfCnpj}
-                  onChange={handleChange}
-                  className="mt-1 h-10"
-                  placeholder="Opcional"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="razaoSocial" className="text-xs font-semibold text-foreground/90">
-                  Razao social
-                </Label>
-                <Input
-                  id="razaoSocial"
-                  name="razaoSocial"
-                  value={form.razaoSocial}
-                  onChange={handleChange}
-                  className="mt-1 h-10"
-                  placeholder="Opcional"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="telefone" className="text-xs font-semibold text-foreground/90">
-                  Telefone *
-                </Label>
-                <Input id="telefone" name="telefone" value={form.telefone} onChange={handleChange} className="mt-1 h-10" />
-              </div>
-
-              <div>
-                <Label htmlFor="residueType" className="text-xs font-semibold text-foreground/90">
-                  Tipo de residuo *
-                </Label>
-                <select
-                  id="residueType"
-                  name="residueType"
-                  value={form.residueType}
-                  onChange={handleChange}
-                  className="mt-1 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Saude">Saude</option>
-                  <option value="Industrial">Industrial</option>
-                </select>
-              </div>
-
-              <div className="sm:col-span-2">
-                <Label htmlFor="clientType" className="text-xs font-semibold text-foreground/90">
-                  Tipo de cliente
-                </Label>
-                <select
-                  id="clientType"
-                  name="clientType"
-                  value={form.clientType}
-                  onChange={handleChange}
-                  className="mt-1 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
-                >
-                  <option value="">Selecione</option>
-                  <option value="Pessoa Fisica">Pessoa Fisica</option>
-                  <option value="Pessoa Juridica">Pessoa Juridica</option>
-                </select>
-              </div>
-
-              <div className="sm:col-span-2">
-                <Label htmlFor="mensagem" className="text-xs font-semibold text-foreground/90">
-                  Detalhes adicionais
-                </Label>
-                <Textarea
-                  id="mensagem"
-                  name="mensagem"
-                  value={form.mensagem}
-                  onChange={handleChange}
-                  rows={4}
-                  className="mt-1 resize-none"
-                  placeholder="Ex.: volume medio, frequencia e local da coleta"
-                />
-              </div>
-
-              <div className="sm:col-span-2 pt-1">
-                <Button type="submit" variant="hero" className="h-11 w-full text-sm" disabled={sending}>
-                  <Send className="h-4 w-4" />
-                  {sending ? "Enviando..." : "Enviar solicitacao"}
-                </Button>
-              </div>
-            </div>
-          </motion.form>
+            <Button variant="cta" size="lg" className="mt-6 h-12 rounded-full px-7" onClick={openContactModal}>
+              Quero preencher agora
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </motion.div>
         </div>
       </div>
     </section>

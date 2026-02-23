@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, PhoneCall, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/Logo";
+import { CONTACT } from "@/lib/contact";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -29,8 +30,8 @@ const Navbar = () => {
       transition={{ duration: 0.45 }}
       className="fixed inset-x-0 top-0 z-50"
     >
-      <div className="border-b border-primary/25 bg-primary/90 px-4 py-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-primary-foreground/85">
-        Coleta licenciada de residuos perigosos - atendimento em MG
+      <div className="border-b border-primary/25 bg-primary/90 px-4 py-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/85">
+        Evite risco ambiental: solicite sua coleta com CDF e resposta comercial rapida
       </div>
 
       <nav
@@ -56,9 +57,17 @@ const Navbar = () => {
               </a>
             ))}
 
+            <a
+              href={`tel:${CONTACT.phoneRaw}`}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent/80"
+            >
+              <PhoneCall className="h-4 w-4" />
+              Ligar agora
+            </a>
+
             <Button variant="cta" size="lg" className="rounded-full px-6 text-sm" asChild>
               <a href="#contato">
-                Falar com especialista
+                Receber proposta hoje
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </Button>
@@ -95,7 +104,7 @@ const Navbar = () => {
               <Button variant="cta" className="mt-4 w-full rounded-full" asChild>
                 <a href="#contato" onClick={() => setMenuOpen(false)}>
                   <PhoneCall className="h-4 w-4" />
-                  Solicitar orcamento
+                  Receber proposta hoje
                 </a>
               </Button>
             </motion.div>

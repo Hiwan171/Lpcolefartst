@@ -4,7 +4,7 @@ export const CONTACT = {
   whatsappRaw: "5531972639866",
   email: "suporteti@colefar.com.br",
   addressLine1: "Rua Governador Milton Campos, 1154",
-  addressLine2: "Tupi – Belo Horizonte/MG",
+  addressLine2: "Tupi - Belo Horizonte/MG",
 };
 
 export const SOCIAL_LINKS = {
@@ -40,7 +40,7 @@ export const sendContactFormEmail = async (form: ContactFormPayload) => {
     },
     body: JSON.stringify({
       _subject: subject,
-      _replyto: form.email,
+      _replyto: form.email || CONTACT.email,
       _template: "table",
       _captcha: "false",
       nome: form.nome,
@@ -62,3 +62,4 @@ export const sendContactFormEmail = async (form: ContactFormPayload) => {
     throw new Error(`Nao foi possivel enviar o formulario por e-mail.${details}`);
   }
 };
+

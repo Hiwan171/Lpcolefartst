@@ -1,4 +1,4 @@
-import { Building2, Sparkles } from "lucide-react";
+﻿import { Building2, Sparkles } from "lucide-react";
 
 type Partner = {
   name: string;
@@ -6,13 +6,13 @@ type Partner = {
 };
 
 const partners: Partner[] = [
-  { name: "Stellantis", logo: "public/Partners/stellantis.png" },
-  { name: "Grupo Zelo", logo: "public/Partners/zelo.png" },
-  { name: "Drogaria Araujo", logo: "public/Partners/araujo.png" },
-  { name: "Universidade Federal de Sao Joao del-Rei", logo: "public/Partners/ufsj.png" },
-  { name: "Atletico MG", logo: "public/Partners/cam.png" },
-  { name: "Fiat", logo: "public/Partners/fiat.png" },
-  { name: "UFTM", logo: "public/Partners/UFTM.png" },
+  { name: "Stellantis", logo: "/Partners/stellantis.png" },
+  { name: "Grupo Zelo", logo: "/Partners/zelo.png" },
+  { name: "Drogaria Araujo", logo: "/Partners/araujo.png" },
+  { name: "Universidade Federal de Sao Joao del-Rei", logo: "/Partners/ufsj.png" },
+  { name: "Atletico MG", logo: "/Partners/cam.png" },
+  { name: "Fiat", logo: "/Partners/fiat.png" },
+  { name: "UFTM", logo: "/Partners/UFTM.png" },
 ];
 
 const marqueeItems = [...partners, ...partners];
@@ -34,12 +34,20 @@ const PartnersSection = () => {
 
           <h3 className="mt-4 text-2xl font-bold text-primary-foreground sm:text-3xl">Empresas que confiam na COLEFAR</h3>
           <p className="mx-auto mt-3 max-w-2xl text-sm text-primary-foreground/63 sm:text-base">
-            Operamos com clientes que exigem padrao tecnico, confiabilidade e conformidade ambiental.
+            Operacao para clientes que exigem padrao tecnico, confiabilidade e conformidade ambiental.
           </p>
         </div>
 
-        <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max gap-4 animate-partners-marquee">
+        <div className="grid grid-cols-2 gap-3 md:hidden">
+          {partners.slice(0, 4).map((partner) => (
+            <div key={partner.name} className="flex h-20 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05] px-4">
+              <img src={partner.logo} alt={`Logo ${partner.name}`} loading="lazy" className="max-h-12 w-auto object-contain opacity-90" />
+            </div>
+          ))}
+        </div>
+
+        <div className="relative hidden overflow-hidden md:block [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max gap-4 animate-partners-marquee" style={{ animationDuration: "38s" }}>
             {marqueeItems.map((partner, index) => (
               <div
                 key={`${partner.name}-${index}`}
