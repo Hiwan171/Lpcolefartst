@@ -1,11 +1,9 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, PhoneCall, ShieldCheck } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle2, Clock3, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
-import { CONTACT } from "@/lib/contact";
 import { openContactModal } from "@/lib/contact-modal";
-import { trackEvent } from "@/lib/analytics";
 
 const highlights = [
   "Reduza risco de multa e passivo ambiental",
@@ -14,9 +12,9 @@ const highlights = [
 ];
 
 const quickTrust = [
-  { label: "Resposta comercial", target: 15, prefix: "ate ", suffix: " min" },
-  { label: "Empresas atendidas", target: 2000, prefix: "+", suffix: "" },
-  { label: "Experiencia", target: 20, prefix: "+ de ", suffix: " anos" },
+  { icon: Clock3, label: "Resposta comercial", target: 15, prefix: "ate ", suffix: " min" },
+  { icon: Building2, label: "Empresas atendidas", target: 1500, prefix: "+", suffix: "" },
+  { icon: ShieldCheck, label: "Experiencia", target: 20, prefix: "+ de ", suffix: " anos" },
 ];
 
 type CountUpProps = {
@@ -101,7 +99,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.3 }}
-            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            className="mt-8 flex items-center justify-center"
           >
             <Button
               variant="cta"
@@ -109,24 +107,8 @@ const HeroSection = () => {
               className="h-12 rounded-full px-7 text-sm sm:text-base"
               onClick={() => openContactModal("hero_primary")}
             >
-              Solicitar diagnostico
+              Quero diagnostico em 1 minuto
               <ArrowRight className="h-4 w-4" />
-            </Button>
-
-            <Button
-              variant="hero-outline"
-              className="h-11 rounded-full border-white/30 px-5 text-xs text-primary-foreground/90 sm:text-sm"
-              asChild
-            >
-              <a
-                href={`https://wa.me/${CONTACT.whatsappRaw}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent("whatsapp_click", { source: "hero_button" })}
-              >
-                <PhoneCall className="h-4 w-4" />
-                Falar no WhatsApp
-              </a>
             </Button>
           </motion.div>
 
@@ -150,13 +132,25 @@ const HeroSection = () => {
             transition={{ duration: 0.55, delay: 0.5 }}
             className="mx-auto mt-7 grid max-w-3xl gap-3 sm:grid-cols-3"
           >
-            {quickTrust.map((item) => (
-              <div key={item.label} className="rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 backdrop-blur">
-                <p className="text-[11px] uppercase tracking-wider text-primary-foreground/55">{item.label}</p>
-                <p className="mt-1 text-sm font-semibold text-primary-foreground">
+            {quickTrust.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.52 + index * 0.08 }}
+                className="alive-card group rounded-xl px-4 py-3"
+              >
+                <div className="relative flex items-center gap-2.5">
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-md border border-accent/35 bg-accent/10 text-accent">
+                    <item.icon className="h-3.5 w-3.5" />
+                  </span>
+                  <p className="text-[11px] uppercase tracking-wider text-primary-foreground/58">{item.label}</p>
+                </div>
+
+                <p className="relative mt-2 text-base font-semibold text-primary-foreground">
                   <CountUp target={item.target} prefix={item.prefix} suffix={item.suffix} />
                 </p>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>

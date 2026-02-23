@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, PhoneCall, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/Logo";
-import { CONTACT } from "@/lib/contact";
+import { openContactModal } from "@/lib/contact-modal";
 
 const navLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -57,19 +57,23 @@ const Navbar = () => {
               </a>
             ))}
 
-            <a
-              href={`tel:${CONTACT.phoneRaw}`}
+            <button
+              type="button"
+              onClick={() => openContactModal("navbar_quick_help")}
               className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent/80"
             >
               <PhoneCall className="h-4 w-4" />
-              Ligar agora
-            </a>
+              Tirar duvidas rapidas
+            </button>
 
-            <Button variant="cta" size="lg" className="rounded-full px-6 text-sm" asChild>
-              <a href="#contato">
-                Receber proposta hoje
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
+            <Button
+              variant="cta"
+              size="lg"
+              className="rounded-full px-6 text-sm"
+              onClick={() => openContactModal("navbar_cta_desktop")}
+            >
+              Ver proposta em minutos
+              <ArrowUpRight className="h-4 w-4" />
             </Button>
           </div>
 
@@ -101,11 +105,16 @@ const Navbar = () => {
                 </a>
               ))}
 
-              <Button variant="cta" className="mt-4 w-full rounded-full" asChild>
-                <a href="#contato" onClick={() => setMenuOpen(false)}>
-                  <PhoneCall className="h-4 w-4" />
-                  Receber proposta hoje
-                </a>
+              <Button
+                variant="cta"
+                className="mt-4 w-full rounded-full"
+                onClick={() => {
+                  openContactModal("navbar_cta_mobile");
+                  setMenuOpen(false);
+                }}
+              >
+                <PhoneCall className="h-4 w-4" />
+                Receber proposta agora
               </Button>
             </motion.div>
           )}

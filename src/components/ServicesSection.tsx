@@ -1,9 +1,8 @@
-﻿import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   Battery,
-  Building2,
   CheckCircle2,
   Droplets,
   FlaskConical,
@@ -208,13 +207,8 @@ const segments: Record<SegmentKey, SegmentData> = {
 
 const ServicesSection = () => {
   const [segment, setSegment] = useState<SegmentKey>("industrial");
-  const [showAll, setShowAll] = useState(false);
   const current = segments[segment];
-  const visibleResidues = showAll ? current.residuos : current.residuos.slice(0, 3);
-
-  useEffect(() => {
-    setShowAll(false);
-  }, [segment]);
+  const visibleResidues = current.residuos.slice(0, 2);
 
   return (
     <section id="servicos" className="relative overflow-hidden bg-background py-24">
@@ -224,7 +218,7 @@ const ServicesSection = () => {
         <div className="absolute right-8 bottom-8 h-64 w-64 rounded-full bg-accent/10 blur-[120px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto max-w-[1160px] px-4">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -237,10 +231,10 @@ const ServicesSection = () => {
             Solucoes de coleta
           </span>
           <h2 className="mt-4 text-3xl font-bold text-primary-foreground sm:text-4xl">
-            Escolha seu segmento e veja como iniciamos sua coleta com seguranca
+            Seu segmento gera este tipo de residuo?
           </h2>
           <p className="mt-3 text-sm text-primary-foreground/66 sm:text-base">
-            Visao rapida dos residuos atendidos para voce decidir sem ruido.
+            Selecione o segmento e valide em segundos se a COLEFAR atende sua operacao.
           </p>
         </motion.div>
 
@@ -248,7 +242,7 @@ const ServicesSection = () => {
           <Button
             type="button"
             variant={segment === "industrial" ? "cta" : "hero-outline"}
-            className="h-11 rounded-full px-6"
+            className="h-10 rounded-full px-6"
             onClick={() => setSegment("industrial")}
           >
             Residuos industriais
@@ -256,7 +250,7 @@ const ServicesSection = () => {
           <Button
             type="button"
             variant={segment === "saude" ? "cta" : "hero-outline"}
-            className="h-11 rounded-full px-6"
+            className="h-10 rounded-full px-6"
             onClick={() => setSegment("saude")}
           >
             Residuos de saude
@@ -271,14 +265,14 @@ const ServicesSection = () => {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.28, ease: "easeOut" }}
           >
-            <div className="overflow-hidden rounded-2xl border border-white/12 bg-white/[0.04]">
+            <div className="alive-card overflow-hidden rounded-2xl">
               <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
                 <div className="p-6 sm:p-8">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{current.label}</p>
                   <h3 className="mt-3 text-2xl font-bold text-primary-foreground sm:text-3xl">{current.pitchTitle}</h3>
                   <p className="mt-3 max-w-xl text-sm leading-relaxed text-primary-foreground/72 sm:text-base">{current.pitchText}</p>
 
-                  <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                  <ul className="mt-4 grid gap-2">
                     {current.sellingPoints.slice(0, 2).map((point) => (
                       <li key={point} className="flex items-start gap-2 text-sm text-primary-foreground/82">
                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
@@ -287,16 +281,28 @@ const ServicesSection = () => {
                     ))}
                   </ul>
 
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {current.establishments.slice(0, 2).map((establishment) => (
+                      <span
+                        key={establishment.name}
+                        className="rounded-full border border-white/12 bg-background/60 px-3 py-1.5 text-xs font-medium text-primary-foreground/85"
+                        title={establishment.description}
+                      >
+                        {establishment.name}
+                      </span>
+                    ))}
+                  </div>
+
                   <Button
                     variant="cta"
-                    className="mt-6 h-11 rounded-full px-7"
+                    className="mt-6 h-10 rounded-full px-6"
                     onClick={() =>
                       openContactModal(`services_${segment}_banner`, {
                         residueType: segment === "industrial" ? "Industrial" : "Saude",
                       })
                     }
                   >
-                    Solicitar diagnostico
+                    Ver se meu residuo se enquadra
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </div>
@@ -311,48 +317,20 @@ const ServicesSection = () => {
                     className="h-full w-full object-cover contrast-110 saturate-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-background/60 via-background/20 to-transparent" />
-                  <div className="absolute bottom-5 left-5 right-5 rounded-xl border border-white/15 bg-background/55 p-4 backdrop-blur">
-                    <p className="text-xs uppercase tracking-[0.18em] text-primary-foreground/60">Atendimento especializado</p>
-                    <p className="mt-1 text-sm font-semibold text-primary-foreground">Equipe tecnica para iniciar sem burocracia</p>
-                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5">
-              <div className="flex items-start gap-3">
-                <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-accent/35 bg-accent/10 text-accent">
-                  <Building2 className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-primary-foreground">Estabelecimentos atendidos</p>
-                  <p className="mt-1 text-sm text-primary-foreground/70">{current.subtitle}</p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {current.establishments.map((establishment) => (
-                  <span
-                    key={establishment.name}
-                    className="rounded-full border border-white/12 bg-background/60 px-3 py-1.5 text-xs font-medium text-primary-foreground/85"
-                    title={establishment.description}
-                  >
-                    {establishment.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
               {visibleResidues.map((service, index) => (
                 <motion.article
                   key={`${segment}-${service.title}`}
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.24, delay: index * 0.04 }}
-                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.03] shadow-card backdrop-blur"
+                  className="alive-card group relative overflow-hidden rounded-2xl shadow-card"
                 >
-                  <div className="relative h-28 overflow-hidden">
+                  <div className="relative h-24 overflow-hidden">
                     <img
                       src={service.image}
                       alt={service.imageAlt}
@@ -362,55 +340,20 @@ const ServicesSection = () => {
                       className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/45 to-transparent" />
-                    <div className="absolute left-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-accent/35 bg-accent/10 text-accent">
-                      <service.icon className="h-5 w-5" />
+                    <div className="absolute left-4 top-3 inline-flex h-9 w-9 items-center justify-center rounded-xl border border-accent/35 bg-accent/10 text-accent">
+                      <service.icon className="h-4 w-4" />
                     </div>
-                    <span className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/25 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary-foreground/75">
-                      0{index + 1}
-                    </span>
                   </div>
 
-                  <div className="p-6 pt-5">
-                    <h3 className="text-xl font-semibold text-primary-foreground">{service.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-primary-foreground/65">{service.description}</p>
+                  <div className="p-5 pt-4">
+                    <h3 className="text-lg font-semibold text-primary-foreground">{service.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-primary-foreground/65">{service.description}</p>
                   </div>
                 </motion.article>
               ))}
             </div>
-
-            {current.residuos.length > 3 && (
-              <div className="mt-6 text-center">
-                <Button
-                  type="button"
-                  variant="hero-outline"
-                  className="h-10 rounded-full px-6"
-                  onClick={() => setShowAll((prev) => !prev)}
-                >
-                  {showAll ? "Ver menos residuos" : "Ver todos os residuos"}
-                </Button>
-              </div>
-            )}
           </motion.div>
         </AnimatePresence>
-
-        <div className="mt-8 rounded-2xl border border-white/12 bg-gradient-to-r from-white/[0.06] via-white/[0.03] to-white/[0.06] p-5 text-center shadow-card sm:p-6">
-          <p className="text-sm font-semibold text-primary-foreground sm:text-base">
-            Nao encontrou seu tipo de residuo? Validamos o enquadramento tecnico para voce em minutos.
-          </p>
-          <Button
-            variant="cta"
-            size="lg"
-            className="mt-4 h-11 rounded-full px-7"
-            onClick={() =>
-              openContactModal("services_footer_cta", {
-                residueType: segment === "industrial" ? "Industrial" : "Saude",
-              })
-            }
-          >
-            Solicitar diagnostico
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </div>
       </div>
     </section>
   );

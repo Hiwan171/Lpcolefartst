@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, ClipboardList, Factory, FileCheck, MoveRight, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { openContactModal } from "@/lib/contact-modal";
@@ -38,7 +38,7 @@ const ProcessSection = () => {
         <div className="absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-primary/16 blur-[150px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto max-w-[1160px] px-4">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ const ProcessSection = () => {
               transition={{ duration: 0.42, delay: index * 0.06 }}
               className="relative"
             >
-              <article className="h-full rounded-2xl border border-white/12 bg-white/[0.04] p-6 backdrop-blur-sm">
+              <article className="alive-card h-full rounded-2xl p-6">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-accent/35 bg-accent/10 text-accent">
                   <step.icon className="h-5 w-5" />
                 </div>
@@ -88,7 +88,7 @@ const ProcessSection = () => {
 
         <div className="mt-10 text-center">
           <Button variant="cta" size="lg" className="h-11 rounded-full px-7" onClick={() => openContactModal("process_cta")}>
-            Solicitar diagnostico
+            Iniciar minha coleta agora
             <ArrowRight className="h-4 w-4" />
           </Button>
         </div>

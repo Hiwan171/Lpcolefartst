@@ -71,3 +71,23 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Analytics (Plano Performance)
+
+1. Create a `.env.local` file based on `.env.example`.
+2. Fill in your IDs:
+   - `VITE_GTM_ID` for Google Tag Manager
+   - `VITE_GA4_ID` for GA4 direct tagging (optional if GA4 is configured inside GTM)
+   - `VITE_META_PIXEL_ID` for Meta Pixel
+3. Restart the dev server after changing env vars.
+
+Tracked events:
+- `page_view`
+- `lead_modal_open`
+- `lead_form_submit`
+- `lead_form_success`
+- `lead_form_error`
+- `whatsapp_click`
+- `phone_click`
+- `email_click`
+- `map_click`

@@ -11,7 +11,7 @@ const MobileContactBar = () => {
           className="h-11 w-full rounded-xl text-sm"
           onClick={() => openContactModal("mobile_sticky")}
         >
-          Solicitar diagnostico
+          Quero receber proposta
           <ArrowRight className="h-4 w-4" />
         </Button>
       </div>

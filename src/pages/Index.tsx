@@ -4,9 +4,9 @@ import ServicesSection from "@/components/ServicesSection";
 import ProcessSection from "@/components/ProcessSection";
 import PartnersSection from "@/components/PartnersSection";
 import AboutSection from "@/components/AboutSection";
+import CTASection from "@/components/CTASection";
 import ContactModal from "@/components/ContactModal";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import MobileContactBar from "@/components/MobileContactBar";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -18,8 +18,8 @@ const Index = () => {
       <ProcessSection />
       <PartnersSection />
       <AboutSection />
+      <CTASection />
       <ContactModal />
-      <MobileContactBar />
       <FloatingWhatsApp />
       <Footer />
     </div>

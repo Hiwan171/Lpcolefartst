@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Building2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import aboutImg from "@/assets/about-colefar.jpg";
@@ -35,11 +35,11 @@ const AboutSection = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
 
               <div className="absolute bottom-5 left-5 right-5 grid gap-3 sm:grid-cols-2">
-                <div className="rounded-xl border border-white/15 bg-background/65 p-4 backdrop-blur">
+                <div className="alive-card rounded-xl p-4">
                   <p className="text-[11px] uppercase tracking-widest text-primary-foreground/60">Experiencia</p>
                   <p className="mt-1 text-2xl font-bold text-primary-foreground">+20 anos</p>
                 </div>
-                <div className="rounded-xl border border-white/15 bg-background/65 p-4 backdrop-blur">
+                <div className="alive-card rounded-xl p-4">
                   <p className="text-[11px] uppercase tracking-widest text-primary-foreground/60">Empresas atendidas</p>
                   <p className="mt-1 text-2xl font-bold text-primary-foreground">+2000</p>
                 </div>
@@ -68,7 +68,7 @@ const AboutSection = () => {
 
             <div className="mt-7 grid gap-3 text-left sm:grid-cols-2">
               {strengths.map((item) => (
-                <div key={item} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                <div key={item} className="alive-card flex items-center gap-3 rounded-xl px-4 py-3">
                   <CheckCircle2 className="h-4 w-4 text-accent" />
                   <p className="text-sm text-primary-foreground/82">{item}</p>
                 </div>
@@ -76,12 +76,12 @@ const AboutSection = () => {
             </div>
 
             <Button
-              variant="hero-outline"
+              variant="cta"
               size="lg"
               className="mt-8 h-11 rounded-full px-7 text-sm sm:text-base"
               onClick={() => openContactModal("about_cta")}
             >
-              Solicitar diagnostico
+              Falar com especialista agora
               <ArrowRight className="h-4 w-4" />
             </Button>
           </motion.div>

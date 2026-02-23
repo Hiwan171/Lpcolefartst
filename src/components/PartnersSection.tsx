@@ -1,4 +1,4 @@
-﻿import { Building2, Sparkles } from "lucide-react";
+import { Building2, Sparkles } from "lucide-react";
 
 type Partner = {
   name: string;
@@ -25,7 +25,7 @@ const PartnersSection = () => {
         <div className="absolute left-8 top-4 h-40 w-40 rounded-full bg-primary/20 blur-[90px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="container relative z-10 mx-auto max-w-[1160px] px-4">
         <div className="mb-6 text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/75">
             <Building2 className="h-4 w-4 text-accent" />
@@ -40,18 +40,18 @@ const PartnersSection = () => {
 
         <div className="grid grid-cols-2 gap-3 md:hidden">
           {partners.slice(0, 4).map((partner) => (
-            <div key={partner.name} className="flex h-20 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05] px-4">
+            <div key={partner.name} className="alive-card flex h-20 items-center justify-center rounded-xl px-4">
               <img src={partner.logo} alt={`Logo ${partner.name}`} loading="lazy" className="max-h-12 w-auto object-contain opacity-90" />
             </div>
           ))}
         </div>
 
-        <div className="relative hidden overflow-hidden md:block [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max gap-4 animate-partners-marquee" style={{ animationDuration: "38s" }}>
+        <div className="relative mx-auto hidden max-w-[1080px] overflow-hidden md:block [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max gap-4 animate-partners-marquee" style={{ animationDuration: "22s" }}>
             {marqueeItems.map((partner, index) => (
               <div
                 key={`${partner.name}-${index}`}
-                className="flex h-20 w-56 items-center justify-center rounded-xl border border-white/12 bg-white/[0.05] px-4 backdrop-blur transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.08]"
+                className="alive-card flex h-20 w-56 items-center justify-center rounded-xl px-4"
                 title={partner.name}
               >
                 <img
