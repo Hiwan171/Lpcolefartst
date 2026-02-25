@@ -19,21 +19,22 @@ const marqueeItems = [...partners, ...partners];
 
 const PartnersSection = () => {
   return (
-    <section className="relative overflow-hidden border-y border-white/10 bg-muted py-14">
+    <section className="relative overflow-hidden border-y border-white/10 bg-background py-14">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,19,28,0.8),rgba(9,17,26,0.5),rgba(12,19,28,0.8))]" />
-        <div className="absolute left-8 top-4 h-40 w-40 rounded-full bg-primary/20 blur-[90px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,66,33,0.76)_42%,rgba(0,0,0,0))]" />
+        <div className="absolute left-12 top-10 h-56 w-56 rounded-full bg-primary/20 blur-[120px]" />
+        <div className="absolute right-8 bottom-8 h-64 w-64 rounded-full bg-accent/10 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto max-w-[1160px] px-4">
         <div className="mb-6 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/75">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/91">
             <Building2 className="h-4 w-4 text-accent" />
             Prova social
           </span>
 
           <h3 className="mt-4 text-2xl font-bold text-primary-foreground sm:text-3xl">Empresas que confiam na COLEFAR</h3>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-primary-foreground/63 sm:text-base">
+          <p className="mx-auto mt-3 max-w-2xl text-sm text-primary-foreground/84 sm:text-base">
             Operacao para clientes que exigem padrao tecnico, confiabilidade e conformidade ambiental.
           </p>
         </div>
@@ -65,7 +66,7 @@ const PartnersSection = () => {
           </div>
         </div>
 
-        <div className="mt-7 flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-primary-foreground/55">
+        <div className="mt-7 flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-primary-foreground/76">
           <Sparkles className="h-3.5 w-3.5 text-accent" />
           atendimento para industrias, saude e comercio especializado
         </div>

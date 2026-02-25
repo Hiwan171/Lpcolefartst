@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { CONTACT } from "@/lib/contact";
 import { trackEvent } from "@/lib/analytics";
 
@@ -18,9 +18,9 @@ const FloatingWhatsApp = () => {
         onClick={() => trackEvent("whatsapp_click", { source: "floating_button" })}
         animate={{ scale: [1, 1, 1.06, 1] }}
         transition={{ duration: 0.85, times: [0, 0.6, 0.82, 1], repeat: 2, repeatDelay: 2.4 }}
-        className="group relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(15,23,42,0.35)] transition-all duration-200 hover:scale-105 hover:shadow-[0_12px_28px_rgba(15,23,42,0.45)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#25D366]/40"
+        className="group relative inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#014423] text-[#B9CA63] shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-200 hover:scale-105 hover:shadow-[0_12px_28px_rgba(0,0,0,0.52)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#B9CA63]/40"
       >
-        <span className="pointer-events-none absolute -inset-1 -z-10 rounded-full bg-[#25D366]/30 blur-xl" />
+        <span className="pointer-events-none absolute -inset-1 -z-10 rounded-full bg-[#004221]/50 blur-xl" />
         <svg viewBox="0 0 32 32" className="h-8 w-8" aria-hidden="true" focusable="false">
           <path
             fill="currentColor"

@@ -1,4 +1,4 @@
-﻿import BrandBar from "@/components/BrandBar";
+import BrandBar from "@/components/BrandBar";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProcessSection from "@/components/ProcessSection";
@@ -14,10 +14,10 @@ const Index = () => {
     <div className="min-h-screen bg-surface-blend pb-24 md:pb-0">
       <BrandBar />
       <HeroSection />
+      <AboutSection />
       <ServicesSection />
       <ProcessSection />
       <PartnersSection />
-      <AboutSection />
       <CTASection />
       <ContactModal />
       <FloatingWhatsApp />
@@ -27,3 +27,5 @@ const Index = () => {
 };
 
 export default Index;
+
+

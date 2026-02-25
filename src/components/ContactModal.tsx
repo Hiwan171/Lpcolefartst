@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -115,28 +115,28 @@ const ContactModal = () => {
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
-            <Label htmlFor="nome" className="text-xs font-semibold text-foreground/90">
+            <Label htmlFor="nome" className="text-xs font-semibold text-foreground/96">
               Nome *
             </Label>
             <Input id="nome" name="nome" value={form.nome} onChange={handleChange} className="mt-1 h-10" />
           </div>
 
           <div>
-            <Label htmlFor="email" className="text-xs font-semibold text-foreground/90">
+            <Label htmlFor="email" className="text-xs font-semibold text-foreground/96">
               E-mail
             </Label>
             <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} className="mt-1 h-10" />
           </div>
 
           <div>
-            <Label htmlFor="telefone" className="text-xs font-semibold text-foreground/90">
+            <Label htmlFor="telefone" className="text-xs font-semibold text-foreground/96">
               Telefone *
             </Label>
             <Input id="telefone" name="telefone" value={form.telefone} onChange={handleChange} className="mt-1 h-10" />
           </div>
 
           <div>
-            <Label htmlFor="residueType" className="text-xs font-semibold text-foreground/90">
+            <Label htmlFor="residueType" className="text-xs font-semibold text-foreground/96">
               Tipo de residuo *
             </Label>
             <select
@@ -156,7 +156,7 @@ const ContactModal = () => {
           </div>
 
           <div className="sm:col-span-2">
-            <Label htmlFor="mensagem" className="text-xs font-semibold text-foreground/90">
+            <Label htmlFor="mensagem" className="text-xs font-semibold text-foreground/96">
               Detalhes adicionais (opcional)
             </Label>
             <Textarea
@@ -170,7 +170,7 @@ const ContactModal = () => {
             />
           </div>
 
-          <label className="sm:col-span-2 flex items-start gap-2 rounded-md border border-white/10 bg-white/[0.02] p-3 text-xs text-foreground/75">
+          <label className="sm:col-span-2 flex items-start gap-2 rounded-md border border-white/10 bg-white/[0.02] p-3 text-xs text-foreground/88">
             <input
               type="checkbox"
               checked={consent}
@@ -187,7 +187,7 @@ const ContactModal = () => {
               <Send className="h-4 w-4" />
               {sending ? "Enviando..." : "Quero receber minha proposta"}
             </Button>
-            <p className="mt-2 text-center text-xs text-foreground/60">Sem spam. Apenas contato para montar sua coleta.</p>
+            <p className="mt-2 text-center text-xs text-foreground/80">Sem spam. Apenas contato para montar sua coleta.</p>
           </div>
         </form>
       </DialogContent>

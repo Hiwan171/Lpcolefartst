@@ -30,7 +30,7 @@ const Navbar = () => {
       transition={{ duration: 0.45 }}
       className="fixed inset-x-0 top-0 z-50"
     >
-      <div className="border-b border-primary/25 bg-primary/90 px-4 py-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/85">
+      <div className="border-b border-primary/25 bg-primary/90 px-4 py-1.5 text-center text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/96">
         Evite risco ambiental: solicite sua coleta com CDF e resposta comercial rapida
       </div>
 
@@ -51,7 +51,7 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-foreground/85 transition-colors hover:text-accent"
+                className="text-sm font-medium text-foreground/94 transition-colors hover:text-accent"
               >
                 {link.label}
               </a>
@@ -99,7 +99,7 @@ const Navbar = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="block rounded-lg px-3 py-3 text-sm font-medium text-foreground/90 transition-colors hover:bg-white/5 hover:text-accent"
+                  className="block rounded-lg px-3 py-3 text-sm font-medium text-foreground/96 transition-colors hover:bg-white/5 hover:text-accent"
                 >
                   {link.label}
                 </a>

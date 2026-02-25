@@ -17,11 +17,11 @@ const contactInfo = [
 
 const CTASection = () => {
   return (
-    <section id="contato" className="relative overflow-hidden py-24">
+    <section id="contato" className="relative overflow-hidden bg-background py-24">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(5,11,17,0.98),rgba(8,20,25,0.9)_48%,rgba(15,48,31,0.84))]" />
-        <div className="absolute -left-16 top-20 h-72 w-72 rounded-full bg-primary/30 blur-[130px]" />
-        <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-accent/12 blur-[140px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,66,33,0.76)_42%,rgba(0,0,0,0))]" />
+        <div className="absolute left-12 top-10 h-56 w-56 rounded-full bg-primary/20 blur-[120px]" />
+        <div className="absolute right-8 bottom-8 h-64 w-64 rounded-full bg-accent/10 blur-[120px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
@@ -41,14 +41,14 @@ const CTASection = () => {
             <h2 className="mt-4 text-3xl font-bold leading-tight text-primary-foreground sm:text-4xl">
               Receba sua proposta e inicie sua coleta ainda hoje
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-primary-foreground/70 sm:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-primary-foreground/89 sm:text-base">
               Cada dia sem destinacao correta aumenta risco de autuacao e gargalo interno. Clique abaixo e abra o
               formulario para receber orientacao pratica e comecar rapido.
             </p>
 
             <div className="alive-card mt-5 rounded-2xl p-4">
               <p className="text-sm font-semibold text-primary-foreground">O que voce recebe no primeiro contato:</p>
-              <ul className="mt-3 space-y-2 text-sm text-primary-foreground/78">
+              <ul className="mt-3 space-y-2 text-sm text-primary-foreground/93">
                 <li>- enquadramento tecnico do residuo</li>
                 <li>- sugestao de frequencia de coleta</li>
                 <li>- orientacao documental para iniciar</li>
@@ -70,8 +70,8 @@ const CTASection = () => {
                   </div>
 
                   <div className="min-w-0">
-                    <p className="text-[11px] font-semibold uppercase tracking-widest text-primary-foreground/50">{info.label}</p>
-                    <p className="text-sm font-medium text-primary-foreground/88">{info.value}</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-widest text-primary-foreground/72">{info.label}</p>
+                    <p className="text-sm font-medium text-primary-foreground/97">{info.value}</p>
                   </div>
                 </div>
               ))}
