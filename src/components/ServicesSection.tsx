@@ -135,7 +135,7 @@ const ServicesSection = () => {
   const isSaude = selectedResidue === "saude";
 
   return (
-    <section id="servicos" className="relative overflow-hidden bg-background py-24">
+    <section id="servicos" className="relative overflow-hidden bg-background py-[clamp(4rem,7vw,6rem)]">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,66,33,0.76)_42%,rgba(0,0,0,0))]" />
         <div className="absolute left-12 top-10 h-56 w-56 rounded-full bg-primary/20 blur-[120px]" />
@@ -148,27 +148,27 @@ const ServicesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="mx-auto max-w-4xl text-center"
+          className="section-header"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary-foreground/93">
             <ShieldCheck className="h-4 w-4 text-accent" />
             Solucoes de coleta
           </span>
 
-          <h2 className="mt-4 text-3xl font-bold text-primary-foreground sm:text-4xl">
+          <h2 className="section-title">
             Atendimento completo para geradores de residuos de saude e industriais
           </h2>
 
-          <p className="mt-5 text-base leading-relaxed text-primary-foreground/92">
+          <p className="section-subtitle mt-4">
             Oferecemos solucoes para pequenos, medios e grandes geradores de residuos sejam eles: infectantes,
             patologicos, medicamentos vencidos e outros que estejam relacionados ao setor de saude e industrial.
           </p>
 
-          <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button
               type="button"
               variant={selectedResidue === "saude" ? "cta" : "hero-outline"}
-              className="h-10 rounded-full px-6"
+              className="h-11 rounded-full px-7 text-sm"
               onClick={() => setSelectedResidue("saude")}
             >
               Residuo de saude
@@ -176,7 +176,7 @@ const ServicesSection = () => {
             <Button
               type="button"
               variant={selectedResidue === "industrial" ? "cta" : "hero-outline"}
-              className="h-10 rounded-full px-6"
+              className="h-11 rounded-full px-7 text-sm"
               onClick={() => setSelectedResidue("industrial")}
             >
               Residuo industrial
@@ -189,7 +189,7 @@ const ServicesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45, delay: 0.08 }}
-          className="mx-auto mt-10 max-w-4xl"
+          className="mx-auto mt-12 max-w-5xl"
         >
           <div className="relative">
             <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/22 via-primary/8 to-accent/18 blur-xl" />
@@ -236,7 +236,7 @@ const ServicesSection = () => {
                           }}
                           whileTap={{ scale: 0.99 }}
                           transition={{ delay: index * 0.04, duration: 0.24 }}
-                          className="group relative min-h-40 cursor-pointer overflow-hidden rounded-2xl border border-white/22 bg-[linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.06))] p-4 backdrop-blur-md transition-all duration-300 hover:border-[#B9CA63] hover:bg-[linear-gradient(145deg,rgba(255,255,255,0.18),rgba(255,255,255,0.08))]"
+                          className="group relative min-h-44 cursor-pointer overflow-hidden rounded-2xl border border-white/22 bg-[linear-gradient(145deg,rgba(255,255,255,0.12),rgba(255,255,255,0.06))] p-4 backdrop-blur-md transition-all duration-300 hover:border-[#B9CA63] hover:bg-[linear-gradient(145deg,rgba(255,255,255,0.18),rgba(255,255,255,0.08))]"
                         >
                           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/16 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                           <div className="pointer-events-none absolute -left-8 -top-8 h-24 w-24 rounded-full bg-accent/22 blur-2xl opacity-80 transition-opacity duration-300 group-hover:opacity-100" />
@@ -245,7 +245,7 @@ const ServicesSection = () => {
                               <span className="absolute inset-[6px] rounded-full border border-[#2B6647]/18" />
                               <item.icon size={44} stroke={1.7} className="relative text-[#1E5A3A] drop-shadow-[0_1px_0_rgba(255,255,255,0.55)]" />
                             </div>
-                            <p className="mt-3 text-[17px] font-semibold leading-tight text-white">{item.title}</p>
+                            <p className="mt-3 text-lg font-semibold leading-tight text-white">{item.title}</p>
                           </div>
                         </motion.article>
                       ))}
@@ -257,13 +257,13 @@ const ServicesSection = () => {
           </div>
         </motion.div>
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-9 flex justify-center">
           <Button
             variant="cta"
             className="h-11 rounded-full px-7 text-sm sm:text-base"
             onClick={() => openContactModal(currentOption.source, { residueType: currentOption.residueType })}
           >
-            Ver se meu residuo se enquadra
+            Quero avaliacao tecnica do meu residuo
             <ArrowRight className="h-4 w-4" />
           </Button>
         </div>

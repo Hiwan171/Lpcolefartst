@@ -50,7 +50,7 @@ const AboutSection = () => {
   return (
     <section
       id="sobre"
-      className="relative -mt-12 overflow-hidden bg-background pb-24 pt-28"
+      className="relative -mt-8 overflow-hidden bg-background pt-[clamp(4.5rem,7.5vw,6.5rem)] pb-[clamp(4rem,7vw,6rem)]"
     >
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,66,33,0.76)_42%,rgba(0,0,0,0))]" />
@@ -59,40 +59,42 @@ const AboutSection = () => {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-12">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-y-10 lg:gap-x-16 xl:gap-x-20">
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="mx-auto w-full max-w-3xl text-center lg:mx-0 lg:max-w-[560px] lg:justify-self-start lg:text-left"
+            className="order-1 mx-auto w-full max-w-3xl text-center lg:order-2 lg:mx-0 lg:flex lg:min-h-[600px] lg:max-w-[600px] lg:flex-col lg:justify-between lg:justify-self-end lg:text-left"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
-              <Building2 className="h-4 w-4 text-accent" />
-              QUEM SOMOS
-            </span>
+            <div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">
+                <Building2 className="h-4 w-4 text-accent" />
+                QUEM SOMOS
+              </span>
 
-            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-              Ha mais de 20 anos transformando responsabilidade ambiental em tranquilidade para empresas mineiras.
-            </h2>
-            <p className="mt-5 text-sm leading-relaxed text-white/86 sm:text-base">
-              Fundada em 2002, a Colefar nasceu da uniâo de um farmaceutico e seu tecnico farmaceutico, com um
-              proposito claro: oferecer solucoes seguras para o tratamento de residuos e garantir o cumprimento
-              rigoroso das exigencias legais.
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-white/86 sm:text-base">
-              Com sede em Belo Horizonte, iniciamos atendendo pequenos geradores e crescemos com responsabilidade,
-              inovacao e compromisso ambiental, tornando-nos referencia no estado.
-            </p>
+              <h2 className="mt-3 font-heading text-[clamp(1.85rem,2.45vw,2.65rem)] font-extrabold leading-[1.08] tracking-[-0.02em] text-white">
+                Ha mais de 20 anos transformando responsabilidade ambiental em tranquilidade para empresas mineiras.
+              </h2>
+              <p className="mt-4 text-[clamp(0.95rem,0.9vw,1.02rem)] leading-relaxed text-white/88">
+                Fundada em 2002, a Colefar nasceu da uniao de um farmaceutico e seu tecnico farmaceutico, com um
+                proposito claro: oferecer solucoes seguras para o tratamento de residuos e garantir o cumprimento
+                rigoroso das exigencias legais.
+              </p>
+              <p className="mt-2 text-[clamp(0.95rem,0.9vw,1.02rem)] leading-relaxed text-white/88">
+                Com sede em Belo Horizonte, iniciamos atendendo pequenos geradores e crescemos com responsabilidade,
+                inovacao e compromisso ambiental, tornando-nos referencia no estado.
+              </p>
 
-            <p className="mt-7 text-base font-semibold text-white sm:text-lg">Experiencia que gera seguranca.</p>
-            <p className="mt-1 text-base font-semibold text-white sm:text-lg">Estrutura que gera confianca.</p>
+              <p className="mt-5 text-[0.98rem] font-semibold text-white sm:text-base">Experiencia que gera seguranca.</p>
+              <p className="mt-1 text-[0.98rem] font-semibold text-white sm:text-base">Estrutura que gera confianca.</p>
+            </div>
 
-            <div className="mt-8 flex justify-center lg:justify-start">
+            <div className="mt-6 flex justify-center lg:mt-4 lg:justify-start">
               <Button
                 variant="cta"
                 size="lg"
-                className="h-11 rounded-full px-7 text-sm sm:text-base"
+                className="h-11 rounded-full px-7 text-sm"
                 onClick={() => openContactModal("about_cta")}
               >
                 Receber proposta para minha empresa
@@ -102,11 +104,11 @@ const AboutSection = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative mx-auto w-full max-w-3xl lg:max-w-[620px] lg:justify-self-end"
+            className="order-2 relative mx-auto w-full max-w-3xl lg:order-1 lg:max-w-[620px] lg:justify-self-start"
           >
             <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/22 via-primary/8 to-accent/18 blur-xl" />
 

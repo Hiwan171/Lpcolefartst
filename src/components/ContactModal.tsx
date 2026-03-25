@@ -107,32 +107,36 @@ const ContactModal = () => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto rounded-2xl border-white/15 bg-background/95 p-6 sm:p-8">
+      <DialogContent className="max-h-[90vh] max-w-[44rem] overflow-y-auto rounded-2xl border-white/15 bg-background/95 p-6 sm:p-9">
         <DialogHeader>
-          <DialogTitle className="text-2xl text-primary-foreground">Preencha seus dados para receber sua proposta</DialogTitle>
-          <DialogDescription>Leva menos de 1 minuto. Sem compromisso.</DialogDescription>
+          <DialogTitle className="font-heading text-[clamp(1.6rem,2.2vw,2.1rem)] leading-tight text-primary-foreground">
+            Preencha seus dados para receber sua proposta
+          </DialogTitle>
+          <DialogDescription className="mt-1 text-sm text-primary-foreground/80">
+            Leva menos de 1 minuto. Sem compromisso.
+          </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <Label htmlFor="nome" className="text-xs font-semibold text-foreground/96">
               Nome *
             </Label>
-            <Input id="nome" name="nome" value={form.nome} onChange={handleChange} className="mt-1 h-10" />
+            <Input id="nome" name="nome" value={form.nome} onChange={handleChange} className="mt-1 h-11" />
           </div>
 
           <div>
             <Label htmlFor="email" className="text-xs font-semibold text-foreground/96">
               E-mail
             </Label>
-            <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} className="mt-1 h-10" />
+            <Input id="email" name="email" type="email" value={form.email} onChange={handleChange} className="mt-1 h-11" />
           </div>
 
           <div>
             <Label htmlFor="telefone" className="text-xs font-semibold text-foreground/96">
               Telefone *
             </Label>
-            <Input id="telefone" name="telefone" value={form.telefone} onChange={handleChange} className="mt-1 h-10" />
+            <Input id="telefone" name="telefone" value={form.telefone} onChange={handleChange} className="mt-1 h-11" />
           </div>
 
           <div>
@@ -144,7 +148,7 @@ const ContactModal = () => {
               name="residueType"
               value={form.residueType}
               onChange={handleChange}
-              className="mt-1 h-10 w-full rounded-md border border-input bg-background px-3 text-sm"
+              className="mt-1 h-11 w-full rounded-md border border-input bg-background px-3 text-sm"
             >
               <option value="">Selecione</option>
               <option value="Saude">Saude</option>
@@ -170,7 +174,7 @@ const ContactModal = () => {
             />
           </div>
 
-          <label className="sm:col-span-2 flex items-start gap-2 rounded-md border border-white/10 bg-white/[0.02] p-3 text-xs text-foreground/88">
+          <label className="sm:col-span-2 flex items-start gap-2 rounded-md border border-white/12 bg-white/[0.03] p-3 text-xs text-foreground/88">
             <input
               type="checkbox"
               checked={consent}
@@ -183,11 +187,13 @@ const ContactModal = () => {
           </label>
 
           <div className="sm:col-span-2 pt-1">
-            <Button type="submit" variant="hero" className="h-11 w-full text-sm" disabled={sending}>
+            <Button type="submit" variant="cta" className="h-12 w-full text-sm" disabled={sending}>
               <Send className="h-4 w-4" />
               {sending ? "Enviando..." : "Quero receber minha proposta"}
             </Button>
-            <p className="mt-2 text-center text-xs text-foreground/80">Sem spam. Apenas contato para montar sua coleta.</p>
+            <p className="mt-2 text-center text-xs text-foreground/80">
+              Sem spam. Apenas contato tecnico-comercial para montar sua coleta.
+            </p>
           </div>
         </form>
       </DialogContent>

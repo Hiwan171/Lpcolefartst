@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clock3, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock3, Mail, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CONTACT } from "@/lib/contact";
 import { openContactModal } from "@/lib/contact-modal";
@@ -17,7 +17,7 @@ const contactInfo = [
 
 const CTASection = () => {
   return (
-    <section id="contato" className="relative overflow-hidden bg-background py-24">
+    <section id="contato" className="relative overflow-hidden bg-background py-[clamp(4rem,7vw,6rem)]">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0),rgba(0,66,33,0.76)_42%,rgba(0,0,0,0))]" />
         <div className="absolute left-12 top-10 h-56 w-56 rounded-full bg-primary/20 blur-[120px]" />
@@ -31,17 +31,17 @@ const CTASection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45 }}
-            className="alive-card w-full rounded-3xl p-6 text-center sm:p-8"
+            className="alive-card w-full rounded-3xl p-6 text-center sm:p-9"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/35 bg-accent/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
               <ShieldCheck className="h-3.5 w-3.5" />
               Time tecnico-comercial
             </span>
 
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-primary-foreground sm:text-4xl">
+            <h2 className="section-title mt-4">
               Receba sua proposta e inicie sua coleta ainda hoje
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-primary-foreground/89 sm:text-base">
+            <p className="section-subtitle mt-4">
               Cada dia sem destinacao correta aumenta risco de autuacao e gargalo interno. Clique abaixo e abra o
               formulario para receber orientacao pratica e comecar rapido.
             </p>
@@ -49,15 +49,24 @@ const CTASection = () => {
             <div className="alive-card mt-5 rounded-2xl p-4">
               <p className="text-sm font-semibold text-primary-foreground">O que voce recebe no primeiro contato:</p>
               <ul className="mt-3 space-y-2 text-sm text-primary-foreground/93">
-                <li>- enquadramento tecnico do residuo</li>
-                <li>- sugestao de frequencia de coleta</li>
-                <li>- orientacao documental para iniciar</li>
+                <li className="flex items-center justify-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent" />
+                  enquadramento tecnico do residuo
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent" />
+                  sugestao de frequencia de coleta
+                </li>
+                <li className="flex items-center justify-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-accent" />
+                  orientacao documental para iniciar
+                </li>
               </ul>
             </div>
 
             <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button variant="cta" size="lg" className="h-12 rounded-full px-7 text-sm sm:text-base" onClick={() => openContactModal("cta_primary_form")}>
-                Quero minha proposta personalizada
+              <Button variant="cta" size="lg" className="h-12 rounded-full px-8 text-sm sm:text-base" onClick={() => openContactModal("cta_primary_form")}>
+                Quero receber minha proposta agora
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>

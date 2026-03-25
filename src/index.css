@@ -1,10 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    /* Keep typography stable across monitor sizes without oversized jumps. */
+    font-size: clamp(14px, 0.18vw + 13.35px, 16px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
   :root {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
@@ -88,6 +95,19 @@
   body {
     @apply bg-background text-foreground font-body antialiased;
     background-image: var(--gradient-surface);
+    overflow-x: hidden;
+    line-height: 1.55;
+  }
+
+  #root {
+    width: 100%;
+  }
+
+  img,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
   }
 
   h1,
@@ -102,6 +122,34 @@
 
 
 @layer components {
+  .section-header {
+    margin-inline: auto;
+    max-width: 64rem;
+    text-align: center;
+  }
+
+  .section-title {
+    @apply mt-4 font-heading font-extrabold leading-tight text-primary-foreground;
+    font-size: clamp(2rem, 3.2vw, 3.15rem);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  .section-subtitle {
+    @apply mx-auto mt-3 max-w-3xl;
+    font-size: clamp(1rem, 1.05vw, 1.14rem);
+    line-height: 1.58;
+    color: hsl(var(--primary-foreground) / 0.86);
+    text-wrap: pretty;
+  }
+
+  .trust-chip {
+    @apply inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-xs font-semibold backdrop-blur-sm;
+    border: 1px solid hsl(0 0% 100% / 0.18);
+    background-color: hsl(0 0% 100% / 0.06);
+    color: hsl(var(--primary-foreground) / 0.9);
+  }
+
   .alive-card {
     position: relative;
     overflow: hidden;

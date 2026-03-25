@@ -1,5 +1,3 @@
-import logo from "@/assets/logo.svg";
-
 interface LogoProps {
   className?: string;
   variant?: "dark" | "light";
@@ -8,7 +6,7 @@ interface LogoProps {
 const Logo = ({ className = "", variant = "dark" }: LogoProps) => {
   return (
     <img
-      src={logo}
+      src="/logo-white.png"
       alt="COLEFAR - Transportando com responsabilidade ambiental"
       data-variant={variant}
       className={`h-9 w-auto object-contain sm:h-10 ${className}`}
