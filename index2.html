@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Colefar | Redesign Concept</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <meta name="description" content="Gestão completa de resíduos hospitalares e industriais com conformidade total e rastreabilidade garantida." />
   
   <!-- Fonts -->
@@ -924,6 +925,333 @@
       );
       pointer-events: none;
     }
+
+    @media (max-width: 767px) {
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      main > section {
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
+      }
+
+      .max-w-7xl,
+      .max-w-4xl,
+      .max-w-3xl {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      .btn-cta-standard {
+        min-height: 2.8rem !important;
+        padding: 0.72rem 1.2rem !important;
+        font-size: 0.74rem !important;
+        letter-spacing: 0.055em !important;
+      }
+
+      #inicio {
+        padding-top: 4.75rem !important;
+        padding-bottom: 3.8rem !important;
+        gap: 2rem !important;
+      }
+
+      #inicio h1 {
+        font-size: 2.55rem !important;
+        line-height: 1.02 !important;
+        margin-bottom: 1rem !important;
+      }
+
+      #inicio .space-y-4 {
+        margin-bottom: 1.75rem !important;
+        max-width: 100% !important;
+      }
+
+      .hero-media-shell {
+        max-width: 100% !important;
+        border-radius: 1.35rem !important;
+        animation: none !important;
+      }
+
+      .hero-media-inner {
+        min-height: 250px !important;
+        border-radius: 1.22rem !important;
+      }
+
+      main section h2 {
+        font-size: 2rem !important;
+        line-height: 1.08 !important;
+        letter-spacing: -0.015em !important;
+      }
+
+      main section p {
+        font-size: 0.92rem;
+      }
+
+      #servicos .mb-16,
+      #regularizacao .mb-16,
+      #protecao .mb-16 {
+        margin-bottom: 2rem !important;
+      }
+
+      #tab-saude,
+      #tab-ind {
+        gap: 0.65rem !important;
+      }
+
+      #tab-saude > div,
+      #tab-ind > div {
+        min-height: 7rem !important;
+        padding: 0.85rem 0.55rem 0.8rem !important;
+        gap: 0.55rem !important;
+        border-radius: 1rem !important;
+      }
+
+      #tab-saude > div > div:first-child,
+      #tab-ind > div > div:first-child {
+        width: 3rem !important;
+        height: 3rem !important;
+        margin-bottom: 0.4rem !important;
+        border-radius: 0.85rem !important;
+      }
+
+      #tab-saude > div h4,
+      #tab-ind > div h4 {
+        font-size: 0.78rem !important;
+        line-height: 1.14 !important;
+        letter-spacing: 0 !important;
+      }
+
+      #processo {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+
+      #processo > .bg-neutral-900 {
+        border-radius: 1.25rem !important;
+      }
+
+      #processo .inline-flex[role="group"] {
+        max-width: 100% !important;
+      }
+
+      #processo .btn-toggle-pill {
+        padding-left: 0.85rem !important;
+        padding-right: 0.85rem !important;
+        font-size: 0.76rem !important;
+      }
+
+      #tab-autoclave,
+      #tab-incineracao {
+        min-height: 0 !important;
+        padding: 1rem !important;
+        gap: 1.3rem !important;
+      }
+
+      #tab-autoclave.pointer-events-none,
+      #tab-incineracao.pointer-events-none {
+        transform: translateX(0) scale(0.98) !important;
+      }
+
+      #tab-autoclave > div:last-child,
+      #tab-incineracao > div:last-child {
+        min-height: 220px !important;
+        height: 220px !important;
+        border-radius: 1rem !important;
+      }
+
+      #regularizacao .regularizacao-grid {
+        gap: 0.85rem !important;
+      }
+
+      .regularizacao-step-card {
+        min-height: 0 !important;
+        padding: 1.15rem !important;
+        gap: 0.65rem !important;
+        border-radius: 1.15rem !important;
+      }
+
+      .regularizacao-step-icon,
+      .protecao-feature-icon {
+        width: 3rem !important;
+        height: 3rem !important;
+        margin-bottom: 0.35rem !important;
+        border-radius: 0.9rem !important;
+      }
+
+      .regularizacao-step-card h4,
+      .protecao-feature-card h4 {
+        font-size: 1rem !important;
+        line-height: 1.22 !important;
+      }
+
+      .regularizacao-step-card p,
+      .protecao-feature-card p {
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
+      }
+
+      #riscos .card-glow--warning > div.relative {
+        padding: 1.2rem !important;
+      }
+
+      #riscos .card-glow--warning {
+        border-radius: 1.15rem !important;
+      }
+
+      #riscos .card-glow--warning > div.relative {
+        border-radius: 1rem !important;
+      }
+
+      .protecao-feature-card {
+        padding: 1.25rem !important;
+        border-radius: 1.15rem !important;
+      }
+
+      footer .max-w-7xl {
+        gap: 0.85rem !important;
+        text-align: center !important;
+      }
+
+      #proposal-modal {
+        align-items: flex-start !important;
+        justify-content: center !important;
+        overflow-y: auto !important;
+        padding: 0.75rem !important;
+      }
+
+      #proposal-modal > div {
+        width: 100% !important;
+        max-width: 26rem !important;
+        max-height: calc(100dvh - 1.5rem) !important;
+        margin: 0 !important;
+        padding: 1rem !important;
+        border-radius: 1.25rem !important;
+        overflow-y: auto !important;
+        transform: none !important;
+      }
+
+      #proposal-modal button[onclick*="proposal-modal"] {
+        top: 0.65rem !important;
+        right: 0.65rem !important;
+        width: 1.9rem !important;
+        height: 1.9rem !important;
+      }
+
+      #proposal-modal h2 {
+        max-width: calc(100% - 2.2rem);
+        margin-bottom: 0.4rem !important;
+        font-size: 1.25rem !important;
+        line-height: 1.12 !important;
+      }
+
+      #proposal-modal h2 + p {
+        margin-bottom: 0.75rem !important;
+        font-size: 0.72rem !important;
+        line-height: 1.35 !important;
+      }
+
+      #proposal-form > * + * {
+        margin-top: 0.55rem !important;
+      }
+
+      #proposal-form .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.55rem !important;
+      }
+
+      #proposal-form label span {
+        margin-bottom: 0.22rem !important;
+        font-size: 0.66rem !important;
+        line-height: 1.1 !important;
+      }
+
+      #proposal-form input {
+        min-height: 2.35rem !important;
+        padding: 0.55rem 0.7rem !important;
+        border-radius: 0.7rem !important;
+        font-size: 0.78rem !important;
+        line-height: 1.15 !important;
+      }
+
+      #proposal-form .pt-4 {
+        padding-top: 0.35rem !important;
+      }
+
+      #proposal-form button[type="submit"].btn-cta-standard {
+        min-height: 2.45rem !important;
+        padding: 0.6rem 1rem !important;
+        font-size: 0.72rem !important;
+      }
+
+      #proposal-form-status {
+        margin-top: 0.55rem !important;
+        font-size: 0.62rem !important;
+        line-height: 1.25 !important;
+      }
+    }
+
+    @media (max-width: 380px) {
+      main > section {
+        padding-top: 3.25rem !important;
+        padding-bottom: 3.25rem !important;
+      }
+
+      #inicio h1 {
+        font-size: 2.2rem !important;
+      }
+
+      .hero-media-inner {
+        min-height: 210px !important;
+      }
+
+      main section h2 {
+        font-size: 1.78rem !important;
+      }
+
+      #tab-saude > div,
+      #tab-ind > div {
+        min-height: 6.4rem !important;
+        padding: 0.7rem 0.45rem !important;
+      }
+
+      #tab-saude > div > div:first-child,
+      #tab-ind > div > div:first-child {
+        width: 2.6rem !important;
+        height: 2.6rem !important;
+      }
+
+      #tab-saude > div h4,
+      #tab-ind > div h4 {
+        font-size: 0.72rem !important;
+      }
+
+      #proposal-modal {
+        padding: 0.5rem !important;
+      }
+
+      #proposal-modal > div {
+        max-height: calc(100dvh - 1rem) !important;
+        padding: 0.85rem !important;
+      }
+
+      #proposal-modal h2 {
+        font-size: 1.12rem !important;
+      }
+
+      #proposal-modal h2 + p {
+        font-size: 0.68rem !important;
+      }
+
+      #proposal-form input {
+        min-height: 2.2rem !important;
+        padding: 0.48rem 0.6rem !important;
+        font-size: 0.74rem !important;
+      }
+    }
 </style>
 
 </head>
@@ -1544,18 +1872,18 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label class="block">
             <span class="text-xs text-neutral-500 mb-1 block">Razão social</span>
-            <input type="text" name="razao_social" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Empresa ou organização" required>
+            <input type="text" name="razao_social" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Empresa" required>
           </label>
           <label class="block">
             <span class="text-xs text-neutral-500 mb-1 block">Nome</span>
-            <input type="text" name="nome" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Responsável pelo contato" required>
+            <input type="text" name="nome" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Contato" required>
           </label>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label class="block">
             <span class="text-xs text-neutral-500 mb-1 block">CPF ou CNPJ</span>
-            <input type="text" name="cpf_cnpj" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="00.000.000/0000-00" required>
+            <input type="text" name="cpf_cnpj" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="CPF/CNPJ" required>
           </label>
           <label class="block">
             <span class="text-xs text-neutral-500 mb-1 block">Telefone</span>
@@ -1566,11 +1894,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <label class="block">
             <span class="text-xs text-neutral-500 mb-1 block">Cidade</span>
-            <input type="text" name="cidade" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Cidade / UF" required>
+            <input type="text" name="cidade" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Cidade/UF" required>
           </label>
           <label class="block">
             <span class="text-xs text-neutral-500 mb-1 block">Segmento</span>
-            <input type="text" name="segmento" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Saúde, indústria, comércio..." required>
+            <input type="text" name="segmento" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Segmento" required>
           </label>
         </div>
 
