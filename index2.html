@@ -45,6 +45,9 @@
       color: #ffffff;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      /* Prevent horizontal scroll issues on mobile during animations */
+      overflow-x: hidden;
+      width: 100%;
     }
 
     /* Hide scrollbar for pristine design */
@@ -107,6 +110,8 @@
       background-size: 24px 24px;
       -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+      /* Promote to GPU layer */
+      transform: translateZ(0);
     }
 
     /* Electric Card Effect - Neutral Base */
@@ -164,6 +169,7 @@
       box-shadow: 0 0 60px -5px rgba(16, 185, 129, 0.45);
       border-color: rgba(16, 185, 129, 0.4);
       border-top-color: rgba(16, 185, 129, 1);
+      will-change: transform, box-shadow;
     }
 
     #regularizacao .regularizacao-grid > article.card-glow--emerald {
@@ -285,7 +291,10 @@
       100% { opacity: 1; transform: translateY(0); filter: blur(0); }
     }
     
-    .animate-entry { animation: fadeInUpBlur 1s cubic-bezier(0.2,0.8,0.2,1) both; }
+    .animate-entry { 
+      animation: fadeInUpBlur 1s cubic-bezier(0.2,0.8,0.2,1) both; 
+      will-change: transform, opacity, filter;
+    }
 
     /* Modal Status Transition Animations */
     @keyframes statusScaleIn {
@@ -318,7 +327,10 @@
       0% { opacity: 0; transform: translateY(30px); filter: blur(8px); }
       100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
     }
-    .animate-on-scroll { animation-play-state: paused !important; }
+    .animate-on-scroll { 
+      animation-play-state: paused !important; 
+      will-change: transform, opacity, filter;
+    }
     .animate-on-scroll.animate { animation-play-state: running !important; }
 
     @keyframes buttonSweep {
@@ -1274,6 +1286,29 @@
         font-size: 0.74rem !important;
       }
     }
+
+    /* Mobile Performance Tweak: Reduce blur workload */
+    @media (max-width: 768px) {
+      .stars { background-attachment: scroll; }
+      .backdrop-blur-xl { backdrop-filter: blur(12px) !important; }
+      [class*="blur-"] { filter: blur(4px) !important; }
+      .hero-animate-float { animation-duration: 12s !important; } /* Slower is cheaper */
+      
+      /* Disable expensive continuous animations if they cause lag */
+      .hero-media-inner::after,
+      .btn-sweep::before {
+        display: none !important;
+      }
+    }
+
+    /* Optimization for GPU Layers */
+    .hero-media-shell, 
+    .protecao-feature-card, 
+    .regularizacao-step-card,
+    #proposal-modal > div {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
 </style>
 
 </head>
@@ -1369,7 +1404,7 @@
         <div class="relative group h-full">
           <div class="p-2 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-sm relative overflow-hidden h-full">
              <!-- The Image -->
-             <img src="assets/about-colefar.jpg" alt="Equipe Colefar" class="rounded-[1.5rem] w-full h-full object-cover grayscale-[30%] opacity-90 relative z-10" onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2670';"/>
+             <img src="assets/about-colefar.jpg" alt="Equipe Colefar" class="rounded-[1.5rem] w-full h-full object-cover grayscale-[30%] opacity-90 relative z-10" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2670';"/>
           </div>
 
           <!-- Floating metrics -->
@@ -1456,7 +1491,7 @@
         <!-- Standard Card Structure -->
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
           <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <img src="assets/icons/hospital.png" alt="" />
+            <img src="assets/icons/hospital.png" alt="" loading="lazy" decoding="async" />
           </div>
           <h4 class="text-sm text-neutral-200 font-medium">Clínicas e Centros Oncológicos</h4>
         </div>
@@ -1470,14 +1505,14 @@
 
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
           <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <img src="assets/icons/pill.png" alt="" />
+            <img src="assets/icons/pill.png" alt="" loading="lazy" decoding="async" />
           </div>
           <h4 class="text-sm text-neutral-200 font-medium">Farmácias</h4>
         </div>
 
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
           <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <img src="assets/icons/medical.png" alt="" />
+            <img src="assets/icons/medical.png" alt="" loading="lazy" decoding="async" />
           </div>
           <h4 class="text-sm text-neutral-200 font-medium">Consultórios</h4>
         </div>
@@ -1491,14 +1526,14 @@
 
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
           <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <img src="assets/icons/home.png" alt="" />
+            <img src="assets/icons/home.png" alt="" loading="lazy" decoding="async" />
           </div>
           <h4 class="text-sm text-neutral-200 font-medium">Home Care</h4>
         </div>
 
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
           <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <img src="assets/icons/sparkle.png" alt="" />
+            <img src="assets/icons/sparkle.png" alt="" loading="lazy" decoding="async" />
           </div>
           <h4 class="text-sm text-neutral-200 font-medium">Clínicas Estéticas</h4>
         </div>
@@ -1515,35 +1550,35 @@
       <div id="tab-ind" class="col-start-1 row-start-1 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 tab-content-transition transform translate-y-4 opacity-0 scale-[0.98] blur-sm z-0 pointer-events-none">
         
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/agro.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/agro.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Agronegócios</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/auto.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/auto.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Indústria Automotiva</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/mecan.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/mecan.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Mecânica</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/metal.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/metal.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Metalúrgica</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/cloth.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/cloth.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Têxtil</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/farma.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/farma.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Indústria Farmacêutica</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/clinic.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/clinic.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Ambulatórios Industriais</h4>
         </div>
         <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
-          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/mol.png" alt="" /></div>
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/mol.png" alt="" loading="lazy" decoding="async" /></div>
           <h4 class="text-sm text-neutral-200 font-medium">Pequenas e Grandes Indústrias</h4>
         </div>
 
@@ -1627,7 +1662,7 @@
 
             <!-- Media -->
            <div class="relative h-64 lg:h-full min-h-[320px] rounded-2xl overflow-hidden group">
-             <img src="assets/services/banner.jpg" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80" onerror="this.src='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2670';" alt="Processo Autoclave" />
+             <img src="assets/services/banner.jpg" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2670';" alt="Processo Autoclave" />
            </div>
 
          </div>
@@ -1668,7 +1703,7 @@
                        <!-- Media -->
            <div class="relative h-64 lg:h-full min-h-[320px] rounded-2xl overflow-hidden group">
              <!-- Using generic factory fire image API as placeholder -->
-             <img src="assets/services/banner2.jpeg" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80" alt="Processo Incineração" />
+             <img src="assets/services/banner2.jpeg" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80" loading="lazy" decoding="async" alt="Processo Incineração" />
            </div>
         </div>
           </div> <!-- End tab-content-grid -->
@@ -1993,8 +2028,13 @@
           tabInd.classList.add('translate-y-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
         }
       
-      // refresh lucide icons for newly displayed
-      lucide.createIcons();
+      // refresh lucide icons only for the container to save main thread time
+      lucide.createIcons({
+        attrs: { class: 'lucide' },
+        nameAttr: 'data-lucide',
+        icons: undefined, // all icons
+        root: tab === 'saude' ? tabSaude : tabInd
+      });
     }
 
     function toggleProcesso(tab) {
@@ -2030,7 +2070,9 @@
         tabI.classList.add('translate-x-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
       }
       
-      lucide.createIcons();
+      lucide.createIcons({
+        root: tab === 'autoclave' ? tabA : tabI
+      });
     }
 
     lucide.createIcons();
