@@ -1924,7 +1924,7 @@
     <div class="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer" onclick="closeProposalModal()"></div>
     
     <!-- Dialog -->
-    <div class="relative w-full max-w-lg bg-neutral-900 border border-white/10 rounded-3xl shadow-2xl p-8 m-4 transform transition-all data-[state=even]:scale-100 scale-95 electric-card">
+    <div class="relative w-full max-w-lg bg-neutral-900 border border-white/10 rounded-2xl shadow-2xl p-7 m-4 transform transition-all data-[state=even]:scale-100 scale-95 electric-card">
       
       <!-- Close Btn -->
       <button onclick="closeProposalModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors z-[110]">
@@ -1933,10 +1933,10 @@
 
       <!-- Content Wrapper to toggle -->
       <div id="modal-form-content" class="transition-all duration-500 opacity-100">
-        <h2 class="text-2xl text-white font-bricolage font-light mb-2">Evite riscos antes que eles virem problema.</h2>
-        <p class="text-xs text-neutral-400 mb-6">Preencha seus dados e fale com nosso time para receber uma proposta sob medida, com segurança jurídica e operação 100% regularizada.</p>
+        <h2 class="text-2xl text-white font-bricolage font-light mb-1.5">Evite riscos antes que eles virem problema.</h2>
+        <p class="text-xs text-neutral-500 mb-4">Preencha seus dados e fale com nosso time para receber uma proposta sob medida, com segurança jurídica e operação 100% regularizada.</p>
 
-        <form id="proposal-form" action="/api/send-proposal" method="POST" class="space-y-4">
+        <form id="proposal-form" action="/api/send-proposal" method="POST" class="space-y-3">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <label class="block">
               <span class="text-xs text-neutral-500 mb-1 block">Razão social</span>
@@ -1975,8 +1975,8 @@
             <input type="email" name="email" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="voce@empresa.com.br" required>
           </label>
 
-          <div class="pt-4">
-            <button type="submit" class="btn-cta-standard w-full btn-sweep px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-medium hover:brightness-110 shadow-lg transition-all flex items-center justify-center gap-2 uppercase tracking-wider">
+          <div class="pt-3">
+            <button type="submit" class="btn-cta-standard w-full btn-sweep px-8 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-medium hover:brightness-110 shadow-lg transition-all flex items-center justify-center gap-2 uppercase tracking-wider">
               <i data-lucide="send" class="w-4 h-4"></i> Enviar
             </button>
             <p id="proposal-form-status" class="text-[10px] text-neutral-500 text-center mt-3" aria-live="polite">Seus dados serão enviados com segurança para a equipe comercial.</p>
