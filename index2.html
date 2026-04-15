@@ -1287,22 +1287,26 @@
       }
     }
 
-    /* Mobile Performance Tweak: Reduce blur workload */
+    /* Mobile Performance Tweak: Only reduce decorative blurs */
     @media (max-width: 768px) {
       .stars { background-attachment: scroll; }
       .backdrop-blur-xl { backdrop-filter: blur(12px) !important; }
-      [class*="blur-"] { filter: blur(4px) !important; }
-      .hero-animate-float { animation-duration: 12s !important; } /* Slower is cheaper */
       
-      /* Disable expensive continuous animations if they cause lag */
+      /* Target only the big background decorative glows, not content images */
+      .fixed.inset-0 .blur-\[120px\], 
+      .fixed.inset-0 .blur-\[100px\] { 
+        filter: blur(60px) !important; 
+      }
+      
+      .hero-animate-float { animation-duration: 12s !important; }
+      
       .hero-media-inner::after,
       .btn-sweep::before {
         display: none !important;
       }
     }
 
-    /* Optimization for GPU Layers */
-    .hero-media-shell, 
+    /* Optimization for GPU Layers without causing sub-pixel blur on content */
     .protecao-feature-card, 
     .regularizacao-step-card,
     #proposal-modal > div {
