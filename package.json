@@ -1,0 +1,12 @@
+{
+  "name": "colefar-lp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx vercel dev",
+    "test:api": "node -c api/send-proposal.js"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.5"
+  }
+}

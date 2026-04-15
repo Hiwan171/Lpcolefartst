@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colefar | Redesign Concept</title>
+  <meta name="description" content="Gestão completa de resíduos hospitalares e industriais com conformidade total e rastreabilidade garantida." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Scripts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            bricolage: ['"Bricolage Grotesque"', 'sans-serif'],
+          },
+          colors: {
+            // Personalização sutil se necessário, mas as cores emerald base são excelentes.
+            brand: {
+              pale: '#d8f0e2',
+              soft: '#1d7a50',
+              base: '#10b981', // equivalent to emerald-500
+              dark: '#0f5c3b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #050505;
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide scrollbar for pristine design */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Text highlight selection */
+    ::selection {
+      background: #5eead4 !important;
+      color: #03130f !important;
+      -webkit-text-fill-color: #03130f !important;
+    }
+
+    input::selection,
+    textarea::selection {
+      background: #5eead4 !important;
+      color: #03130f !important;
+      -webkit-text-fill-color: #03130f !important;
+    }
+
+    ::-moz-selection {
+      background: #5eead4 !important;
+      color: #03130f !important;
+    }
+
+    /* Backgrounds & Textures */
+    /* Utility Classes */
+    .text-emerald-gradient {
+      background: linear-gradient(to bottom, #bbf7d0 0%, #10b981 50%, #064e3b 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      color: transparent !important;
+      display: inline-block;
+    }
+
+    .text-warning-gradient {
+      background: linear-gradient(to bottom, #fde68a 0%, #f97316 50%, #991b1b 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      color: transparent !important;
+      display: inline-block;
+    }
+
+    .stars {
+      background-image:
+        radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 160px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 130px 80px, #ffffff, rgba(0,0,0,0));
+      background-size: 200px 200px;
+      opacity: 0.18;
+    }
+
+    .grid-bg {
+      background-image: linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    }
+
+    /* Electric Card Effect - Neutral Base */
+    .electric-card {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05), inset 0 0 10px rgba(255, 255, 255, 0.02);
+    }
+
+    /* Warning Card State - Unified for Risks Section */
+    .card-glow--warning { 
+      border: 1px solid rgba(249, 115, 22, 0.15);
+      box-shadow: 
+        0 0 50px -10px rgba(239, 68, 68, 0.25),
+        inset 0 0 15px rgba(249, 115, 22, 0.1);
+    }
+    
+    .card-glow--warning:hover { 
+      box-shadow: 0 0 60px -5px rgba(239, 68, 68, 0.45);
+      border-color: rgba(249, 115, 22, 0.4);
+      border-top-color: rgba(249, 115, 22, 1);
+    }
+
+    #riscos .card-glow--warning {
+      padding: 0 !important;
+      overflow: hidden;
+      border-radius: 1.5rem !important;
+      border: 2px solid rgba(249, 115, 22, 0.18) !important;
+      background: #0A0A0A !important;
+      box-shadow:
+        0 0 50px -10px rgba(239, 68, 68, 0.25),
+        inset 0 0 15px rgba(249, 115, 22, 0.1) !important;
+    }
+
+    #riscos .card-glow--warning > div.absolute {
+      display: none;
+    }
+
+    #riscos .card-glow--warning > div.relative {
+      border-radius: 1.35rem !important;
+    }
+
+    #riscos .card-glow--warning:hover {
+      border-color: rgba(249, 115, 22, 0.35) !important;
+      border-top-color: rgba(249, 115, 22, 0.35) !important;
+      box-shadow: 0 0 60px -5px rgba(239, 68, 68, 0.45) !important;
+    }
+
+    .card-glow--emerald { 
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      box-shadow: 
+        0 0 50px -10px rgba(16, 185, 129, 0.25),
+        inset 0 0 15px rgba(16, 185, 129, 0.1);
+    }
+    
+    .card-glow--emerald:hover { 
+      box-shadow: 0 0 60px -5px rgba(16, 185, 129, 0.45);
+      border-color: rgba(16, 185, 129, 0.4);
+      border-top-color: rgba(16, 185, 129, 1);
+    }
+
+    #regularizacao .regularizacao-grid > article.card-glow--emerald {
+      padding: 0 !important;
+      overflow: hidden;
+      border-radius: 1.5rem !important;
+      border: 2px solid rgba(45, 212, 191, 0.18) !important;
+      background: #0A0A0A !important;
+      box-shadow:
+        0 0 50px -10px rgba(16, 185, 129, 0.25),
+        inset 0 0 15px rgba(16, 185, 129, 0.1) !important;
+    }
+
+    #regularizacao .regularizacao-grid > article.card-glow--emerald > div:first-child {
+      border-radius: 1.35rem !important;
+    }
+
+    #regularizacao .regularizacao-grid > article.card-glow--emerald:hover {
+      border-color: rgba(45, 212, 191, 0.35) !important;
+      border-top-color: rgba(45, 212, 191, 0.35) !important;
+      box-shadow: 0 0 60px -5px rgba(16, 185, 129, 0.45) !important;
+    }
+
+    /* Segment cards: refined for vivid emerald theme and better shading */
+    #tab-saude > div,
+    #tab-ind > div {
+      width: 100%;
+      min-height: 8.9rem;
+      padding: 1.3rem 1rem 1.15rem;
+      justify-content: center;
+      gap: 0.95rem;
+      background: linear-gradient(180deg, rgba(10,32,22,0.98), rgba(8,12,10,1)) !important;
+      border: 1px solid rgba(16,185,129,0.12) !important;
+      border-top-color: rgba(16,185,129,0.3) !important;
+      border-radius: 1.5rem !important;
+      box-shadow: 
+        0 10px 25px -5px rgba(0,0,0,0.5),
+        0 0 30px -10px rgba(16,185,129,0.12) !important;
+      transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      isolation: isolate;
+    }
+
+    #tab-saude > div:hover,
+    #tab-ind > div:hover {
+      background: linear-gradient(180deg, rgba(15,50,35,0.98), rgba(10,18,15,1)) !important;
+      border-color: rgba(110, 231, 183, 0.25) !important;
+      border-top-color: rgba(16,185,129,0.8) !important;
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 20px 45px -12px rgba(0,0,0,0.6),
+        0 0 45px -5px rgba(16,185,129,0.3) !important;
+    }
+
+    #tab-saude > div > div:first-child,
+    #tab-ind > div > div:first-child {
+      width: 2.6rem;
+      height: 2.6rem;
+      margin-bottom: 0;
+      border-radius: 0.95rem;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(16,185,129,0.06), rgba(255,255,255,0.01)) !important;
+      border: 1px solid rgba(16,185,129,0.1);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.03),
+        0 0 0 1px rgba(16, 185, 129, 0.02);
+      transition: all 400ms ease;
+    }
+
+    #tab-saude > div > div:first-child img,
+    #tab-ind > div > div:first-child img {
+      width: 86%;
+      height: 86%;
+      display: block;
+      margin: auto;
+      object-fit: contain;
+      object-position: center;
+      opacity: 1;
+      filter:
+        brightness(0) invert(1)
+        drop-shadow(0 0 8px rgba(16, 185, 129, 0.6));
+    }
+
+    #tab-saude > div > div:first-child img.segment-icon--dense,
+    #tab-ind > div > div:first-child img.segment-icon--dense {
+      width: 82%;
+      height: 82%;
+    }
+
+    #tab-saude > div > div:first-child img.segment-icon--paw,
+    #tab-ind > div > div:first-child img.segment-icon--paw {
+      width: 100%;
+      height: 100%;
+    }
+
+    #tab-saude > div h4,
+    #tab-ind > div h4 {
+      font-size: 0.96rem;
+      line-height: 1.2;
+      max-width: 12rem;
+      text-wrap: balance;
+      color: #def7ea;
+      text-shadow:
+        0 0 1px rgba(110, 231, 183, 0.36),
+        0 0 6px rgba(16, 185, 129, 0.12);
+    }
+
+    @media (min-width: 768px) {
+      #tab-saude,
+      #tab-ind {
+        grid-template-columns: repeat(4, minmax(0, 15rem));
+        justify-content: center;
+        gap: 0.95rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUpBlur {
+      0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    
+    .animate-entry { animation: fadeInUpBlur 1s cubic-bezier(0.2,0.8,0.2,1) both; }
+    .delay-75 { animation-delay: 75ms; }
+    .delay-150 { animation-delay: 150ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-500 { animation-delay: 500ms; }
+
+    @keyframes animationIn {
+      0% { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+    }
+    .animate-on-scroll { animation-play-state: paused !important; }
+    .animate-on-scroll.animate { animation-play-state: running !important; }
+
+    @keyframes buttonSweep {
+      0% { transform: translateX(-230%) rotate(18deg); opacity: 0; }
+      20% { opacity: 1; filter: blur(2px); }
+      100% { transform: translateX(200%) rotate(18deg); opacity: 0; }
+    }
+
+    .btn-sweep {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .btn-sweep::before {
+      content: '';
+      position: absolute;
+      top: -35%; left: -22%;
+      width: 30%; height: 180%;
+      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.4), rgba(255,255,255,0));
+      transform: translateX(-230%) rotate(18deg);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn-sweep:hover::before {
+      animation: buttonSweep 900ms cubic-bezier(0.25, 1, 0.5, 1);
+    }
+  
+    /* Main CTA Style for Standardization */
+    .btn-cta-standard {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 0.6rem !important;
+      min-height: 3.15rem !important;
+      padding: 0.9rem 1.8rem !important;
+      background: linear-gradient(to top, #d8f0e2, #4e9c73, #1d7a50) !important;
+      color: #081f14 !important;
+      font-weight: 700 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.07em !important;
+      font-size: 0.84rem !important; /* To be safe */
+      border: none !important;
+      border-radius: 999px !important;
+      border-top: 1px solid rgba(255,255,255,0.4) !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 0 40px -6px rgba(15,92,59,0.6) !important;
+    }
+    .btn-cta-standard:hover {
+      transform: scale(1.05) !important;
+      filter: brightness(1.1) !important;
+      box-shadow: 0 0 50px -5px rgba(15,92,59,0.8) !important;
+    }
+    .btn-cta-standard * {
+      color: #081f14 !important;
+    }
+
+    #riscos .btn-cta-standard {
+      background: linear-gradient(to top, #fde68a, #f97316, #991b1b) !important;
+      color: #1f0704 !important;
+      border-top: 1px solid rgba(255,255,255,0.45) !important;
+      box-shadow: 0 0 40px -6px rgba(249,115,22,0.62) !important;
+    }
+
+    #riscos .btn-cta-standard:hover {
+      filter: brightness(1.08) !important;
+      box-shadow: 0 0 50px -5px rgba(239,68,68,0.7) !important;
+    }
+
+    #riscos .btn-cta-standard * {
+      color: #1f0704 !important;
+    }
+
+    .btn-toggle-pill {
+      appearance: none !important;
+      -webkit-appearance: none !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      border: 1px solid transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+      transform: translateZ(0);
+      -webkit-tap-highlight-color: transparent;
+      background-clip: padding-box !important;
+      transition: background 0.35s ease, color 0.35s ease, opacity 0.35s ease !important;
+    }
+
+    .btn-toggle-pill:focus,
+    .btn-toggle-pill:focus-visible,
+    .btn-toggle-pill:active {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Style for Active Tab Toggles to map the green CTA */
+    .btn-toggle-active {
+      background: linear-gradient(to top, #d8f0e2, #4e9c73, #1d7a50) !important;
+      color: #081f14 !important;
+      font-weight: 700 !important;
+      box-shadow: inset 0 0 0 1px rgba(8,31,20,0.14), 0 0 20px -8px rgba(15,92,59,0.45) !important;
+    }
+
+    .tab-content-transition {
+      transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Novo estilo Premium e Criativo para os ícones de serviços */
+    #tab-saude > div,
+    #tab-ind > div {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #tab-saude > div::before,
+    #tab-ind > div::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 120%; height: 120%;
+      background: radial-gradient(circle at center, rgba(16,185,129,0.1) 0%, transparent 60%);
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    #tab-saude > div:hover::before,
+    #tab-ind > div:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    #tab-saude > div > div:first-child,
+    #tab-ind > div > div:first-child {
+      width: 4rem !important;
+      height: 4rem !important;
+      margin-bottom: 1.25rem !important;
+      background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(6,78,59,0.3) 100%) !important;
+      border: 1px solid rgba(16,185,129,0.2) !important;
+      box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.1),
+        0 10px 25px -5px rgba(16,185,129,0.1) !important;
+      border-radius: 16px !important; 
+      transform: none;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Glow backdrop behind icon */
+    #tab-saude > div > div:first-child::after,
+    #tab-ind > div > div:first-child::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: inherit;
+      background: rgba(16,185,129,0.6);
+      filter: blur(14px);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    #tab-saude > div > div:first-child i,
+    #tab-ind > div > div:first-child i,
+    #tab-saude > div > div:first-child svg,
+    #tab-ind > div > div:first-child svg {
+      width: 2.3rem !important;
+      height: 2.3rem !important;
+      stroke-width: 1.3 !important;
+      color: #10b981 !important;
+      filter: drop-shadow(0 0 8px rgba(16,185,129,0.4));
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    }
+    
+    #tab-saude > div > h4,
+    #tab-ind > div > h4 {
+      position: relative;
+      z-index: 10;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    #tab-saude > div:hover > div:first-child,
+    #tab-ind > div:hover > div:first-child {
+      transform: translateY(-5px) scale(1.1) !important;
+      background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(16,185,129,0.05)) !important;
+      border-color: rgba(16,185,129,0.4) !important;
+      box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.15), 
+        0 15px 30px -5px rgba(16,185,129,0.4) !important;
+    }
+
+    #tab-saude > div:hover > div:first-child::after,
+    #tab-ind > div:hover > div:first-child::after {
+      opacity: 0.6;
+    }
+
+    #tab-saude > div:hover > div:first-child i,
+    #tab-ind > div:hover > div:first-child i,
+    #tab-saude > div:hover > div:first-child svg,
+    #tab-ind > div:hover > div:first-child svg {
+      color: #ffffff !important;
+      filter: drop-shadow(0 0 12px rgba(16,185,129,0.8));
+      transform: scale(1.05);
+    }
+
+    @media (min-width: 768px) {
+      #tab-saude > div > div:first-child,
+      #tab-ind > div > div:first-child {
+        width: 4.8rem !important;
+        height: 4.8rem !important;
+        border-radius: 20px !important;
+      }
+
+      #tab-saude > div > div:first-child i,
+      #tab-ind > div > div:first-child i,
+      #tab-saude > div > div:first-child svg,
+      #tab-ind > div > div:first-child svg {
+        width: 2.8rem !important;
+        height: 2.8rem !important;
+        stroke-width: 1.3 !important;
+      }
+      
+      #tab-saude > div > h4,
+      #tab-ind > div > h4 {
+        font-size: 1.05rem;
+      }
+    }
+
+    /* Estilo Premium para os Ícones de Etapas / Timeline (Regularização) */
+    #regularizacao .regularizacao-step-icon {
+      position: relative;
+      overflow: hidden;
+      background-color: #0f0f0f !important; /* Base sólida para esconder a linha */
+      background-image: linear-gradient(to bottom, rgba(16,185,129,0.08), rgba(10,10,10,1)) !important;
+      border: 1px solid rgba(16,185,129,0.15) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 0 20px rgba(16,185,129,0.05) !important;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+    
+    #regularizacao .regularizacao-step-icon::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at top, rgba(16,185,129,0.2) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    #regularizacao .regularizacao-step-icon i,
+    #regularizacao .regularizacao-step-icon svg {
+      color: #e5e7eb !important; /* Neutral white/grayish */
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.1));
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+
+    /* Efeito de Hover nas etapas */
+    #regularizacao .group:hover .regularizacao-step-icon {
+      border-color: rgba(16,185,129,0.5) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 10px 30px -5px rgba(16,185,129,0.4) !important;
+      transform: translateY(-6px) scale(1.05) !important;
+    }
+
+    #regularizacao .group:hover .regularizacao-step-icon::before {
+      opacity: 1;
+    }
+
+    #regularizacao .group:hover .regularizacao-step-icon i,
+    #regularizacao .group:hover .regularizacao-step-icon svg {
+      color: #10b981 !important; /* Emerald bright neon */
+      filter: drop-shadow(0 0 14px rgba(16,185,129,0.9));
+      transform: scale(1.1);
+    }
+    
+    .hero-media-shell {
+      position: relative;
+      border-radius: 32px;
+      padding: 2px; /* Aumentado para borda mais visível */
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(16,185,129,0.6) 0%, rgba(16,185,129,0.1) 50%, rgba(255,255,255,0.2) 100%);
+      box-shadow: 
+        0 22px 48px rgba(0, 0, 0, 0.4), 
+        0 0 30px rgba(16,185,129,0.2);
+    }
+
+    .hero-media-shell::before {
+      content: '';
+      position: absolute;
+      top: -14%;
+      left: -8%;
+      width: 72%;
+      height: 52%;
+      background: radial-gradient(circle, rgba(16,185,129,0.1) 0%, transparent 68%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .hero-media-shell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 1px 0 rgba(16,185,129,0.4);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-media-inner {
+      position: relative;
+      z-index: 1;
+      min-height: 380px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(15,16,16,0.98), rgba(10,10,10,1));
+    }
+
+    /* Hero Animations */
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes diagonalShine {
+      0% { transform: translateX(-150%) skewX(-25deg); }
+      70%, 100% { transform: translateX(250%) skewX(-25deg); }
+    }
+
+    .hero-animate-float {
+      animation: heroFloat 8s ease-in-out infinite;
+    }
+
+    .hero-media-inner::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 40%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      animation: diagonalShine 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-media-inner {
+        min-height: 480px;
+      }
+    }
+
+    .regularizacao-step-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.95rem;
+      min-height: 240px;
+      padding: 1.8rem 1.45rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: linear-gradient(180deg, rgba(20,22,22,0.98), rgba(12,14,14,1));
+      transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      isolation: isolate;
+    }
+
+    /* Aura Glow Emerald Theme */
+    .step-glow--emerald {
+      box-shadow: 
+        0 0 50px -15px rgba(16, 185, 129, 0.25),
+        inset 0 0 20px rgba(16, 185, 129, 0.05);
+      border-top-color: rgba(16, 185, 129, 0.4);
+    }
+
+    .step-glow--emerald:hover {
+      transform: translateY(-8px);
+      box-shadow: 
+        0 0 60px -10px rgba(16, 185, 129, 0.45),
+        inset 0 0 25px rgba(16, 185, 129, 0.1);
+      border-color: rgba(16,185,129,0.3);
+      border-top-color: rgba(16,185,129,1);
+    }
+
+    .regularizacao-step-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(16,185,129,0.3);
+      background: linear-gradient(180deg, rgba(25,28,27,0.98), rgba(15,18,17,1));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 25px 45px -10px rgba(0,0,0,0.4),
+        0 0 20px rgba(16,185,129,0.1);
+    }
+
+    .regularizacao-step-card--accent {
+      border-color: rgba(16,185,129,0.2);
+      background: linear-gradient(180deg, rgba(10,35,25,0.98), rgba(5,15,10,1));
+    }
+
+    .regularizacao-step-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(6,78,59,0.2));
+      border: 1px solid rgba(16,185,129,0.15);
+      box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 8px 16px -4px rgba(16,185,129,0.1);
+      margin-bottom: 0.5rem;
+      transition: all 400ms ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    .regularizacao-step-card:hover .regularizacao-step-icon {
+      transform: scale(1.1) rotate(3deg);
+      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,78,59,0.3));
+      border-color: rgba(16, 185, 129, 0.4);
+      box-shadow: 0 0 20px rgba(16,185,129,0.3);
+    }
+
+    .regularizacao-step-card:hover .regularizacao-step-icon i,
+    .regularizacao-step-card:hover .regularizacao-step-icon svg {
+      color: #ffffff;
+      filter: drop-shadow(0 0 12px rgba(16,185,129,0.8));
+    }
+
+    .regularizacao-step-icon i,
+    .regularizacao-step-icon svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      color: #ffffff;
+      filter: drop-shadow(0 0 10px rgba(16,185,129,0.5));
+      transition: all 400ms ease;
+    }
+
+    .regularizacao-step-card h4 {
+      margin: 0.5rem 0 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #ffffff;
+      font-family: "Bricolage Grotesque", sans-serif;
+      letter-spacing: -0.01em;
+    }
+
+    .regularizacao-step-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+
+    /* Connecting Path Line */
+    .regularizacao-path-wrapper {
+      position: absolute;
+      top: 3.6rem;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      z-index: 0;
+      display: none;
+    }
+
+    @media (min-width: 1280px) {
+      .regularizacao-path-wrapper {
+        display: block;
+      }
+      .regularizacao-path-line {
+        position: relative;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, 
+          rgba(16,185,129,0.05) 0%, 
+          rgba(16,185,129,0.8) 20%, 
+          rgba(16,185,129,0.8) 80%, 
+          rgba(16,185,129,0.05) 100%
+        );
+        border-radius: 4px;
+        box-shadow: 0 0 15px rgba(16,185,129,0.3);
+      }
+    }
+
+    .regularizacao-path-pulse {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(16,185,129,0.6), 
+        transparent);
+      width: 30%;
+      height: 100%;
+      animation: linePulse 3s infinite linear;
+    }
+
+    @keyframes linePulse {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+
+    .protecao-feature-card {
+      padding: 2.2rem 1.8rem;
+      border-radius: 1.5rem;
+      border: 2px solid rgba(45, 212, 191, 0.18) !important;
+      background: #0A0A0A !important;
+      box-shadow: 
+        0 0 50px -10px rgba(16, 185, 129, 0.25),
+        inset 0 0 15px rgba(16, 185, 129, 0.1) !important;
+      transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .protecao-feature-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(45,212,191,0.05) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 400ms ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .protecao-feature-card:hover {
+      transform: translateY(-0.25rem);
+      border-color: rgba(45, 212, 191, 0.35) !important;
+      border-top-color: rgba(45, 212, 191, 0.35) !important;
+      background: #0A0A0A !important;
+      box-shadow: 0 0 60px -5px rgba(16, 185, 129, 0.45) !important;
+    }
+
+    .protecao-feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .protecao-feature-icon {
+      width: 3.8rem;
+      height: 3.8rem;
+      margin-bottom: 1.5rem;
+      border-radius: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(16,185,129,0.08), rgba(255,255,255,0.02)) !important;
+      border: 1px solid rgba(16,185,129,0.12);
+      box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 8px 16px -4px rgba(16,185,129,0.05);
+      transition: all 400ms ease;
+    }
+
+    .protecao-feature-card:hover .protecao-feature-icon {
+      transform: scale(1.1) rotate(4deg);
+      background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(6,78,59,0.3));
+      border-color: rgba(16,185,129,0.4);
+      box-shadow: 
+        0 0 20px rgba(16,185,129,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .protecao-feature-icon i,
+    .protecao-feature-icon svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      color: #ffffff;
+      filter: drop-shadow(0 0 12px rgba(16,185,129,0.45));
+      transition: all 400ms ease;
+    }
+
+    .protecao-feature-card:hover .protecao-feature-icon i,
+    .protecao-feature-card:hover .protecao-feature-icon svg {
+      color: #ffffff;
+      filter: drop-shadow(0 0 15px rgba(16,185,129,0.8));
+    }
+
+    .protecao-feature-card h4 {
+      margin: 0 0 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #ffffff;
+      font-family: "Bricolage Grotesque", sans-serif;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+
+    .protecao-feature-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+
+    /* Section End Divider */
+    .section-divider {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent 0%,
+        rgba(16, 185, 129, 0.08) 15%,
+        rgba(16, 185, 129, 0.35) 40%,
+        rgba(255, 255, 255, 0.18) 50%,
+        rgba(16, 185, 129, 0.35) 60%,
+        rgba(16, 185, 129, 0.08) 85%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    .section-divider-warning {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right,
+        transparent 0%,
+        rgba(16, 185, 129, 0.08) 15%,
+        rgba(16, 185, 129, 0.35) 40%,
+        rgba(255, 255, 255, 0.18) 50%,
+        rgba(16, 185, 129, 0.35) 60%,
+        rgba(16, 185, 129, 0.08) 85%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+</style>
+
+</head>
+
+<body class="min-h-screen overflow-x-hidden selection:bg-emerald-500/30 text-white bg-[#050505] relative antialiased">
+  
+  <!-- Background Layers -->
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <div class="stars absolute inset-0"></div>
+    <!-- Glows Green/Emerald -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-emerald-900/10 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-teal-950/20 blur-[100px] rounded-full"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 bg-[#050505]/70 backdrop-blur-xl border-b border-white/5 animate-entry delay-75">
+    <div class="max-w-7xl mx-auto px-6 py-3">
+      <div class="flex items-center justify-between">
+        
+        <!-- Logo -->
+        <a href="#inicio" class="flex items-center hover:opacity-80 transition-opacity">
+          <img src="assets/logo-white.png" alt="Colefar Logo" class="h-7 lg:h-9 w-auto" />
+        </a>
+
+
+
+        <!-- CTA -->
+        <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard btn-sweep hidden md:flex items-center gap-2 hover:brightness-110 transition-all text-[13px] text-white bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500 border-white/20 rounded-full border-t border-b px-5 py-1.5 shadow-[0_0_15px_-3px_rgba(16,185,129,0.4)]">
+          Solicitar proposta
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="relative z-10 w-full overflow-hidden">
+    
+    <!-- =========================
+         FOLD 1: HERO
+    ========================== -->
+    <section id="inicio" class="max-w-7xl mx-auto px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative">
+      
+      <!-- Left Copy -->
+      <div class="lg:col-span-6 flex flex-col relative items-start z-10">
+        
+        <!-- Headline -->
+        <h1 class="text-5xl lg:text-[60px] xl:text-[64px] leading-[1.05] text-white mb-6 font-bricolage font-light tracking-tight animate-entry delay-150 uppercase" style="text-wrap: balance;">
+          Opere com <span class="block">Segurança.</span>
+          <span class="text-emerald-gradient block">Elimine riscos.</span>
+          Antes que surjam.
+        </h1>
+        
+        <!-- Copy -->
+        <div class="space-y-4 mb-10 max-w-[90%] xl:max-w-xl animate-entry delay-200">
+          <p class="text-lg text-emerald-100/90 leading-relaxed font-sans">
+            Gestão completa de resíduos hospitalares e industriais com conformidade total e rastreabilidade garantida.
+          </p>
+          <p class="text-sm text-neutral-300/90 leading-relaxed font-sans mt-2">
+            Com a Colefar, sua empresa conta com uma solução integrada que assume toda a operação, da coleta à destinação final, garantindo segurança ambiental e jurídica em cada etapa.
+          </p>
+        </div>
+        
+        <!-- Action -->
+        <div class="flex flex-col gap-4 items-start animate-entry delay-300 w-full max-w-xl">
+          <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard w-full">
+            <span>Receber proposta e eliminar riscos</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Right Image Card -->
+      <div class="lg:col-span-6 flex justify-center lg:justify-end z-10 animate-entry delay-500 w-full relative">
+        <div class="hero-media-shell w-full max-w-xl hero-animate-float">
+          <div class="hero-media-inner flex flex-col items-center">
+            <img src="assets/hero-bg.png" alt="Caminhão Colefar e Equipe" class="absolute inset-0 w-full h-full object-cover opacity-90 grayscale-[10%]" onerror="this.src='https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?q=80&w=2670&auto=format&fit=crop'; this.classList.add('opacity-40');" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/72 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-black/20"></div>
+            <div class="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white/[0.03] to-transparent"></div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+    </section>
+
+    <!-- =========================
+         FOLD 2: SOBRE & MÉTRICAS
+    ========================== -->
+    <section id="sobre" class="max-w-7xl mx-auto px-6 py-24 relative z-10 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+      
+      <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent top-0"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Media / Metrics -->
+        <div class="relative group">
+          <div class="p-2 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-sm relative overflow-hidden">
+             <!-- The Image -->
+             <img src="assets/about-colefar.jpg" alt="Equipe Colefar" class="rounded-[1.5rem] w-full aspect-[4/3] object-cover grayscale-[30%] opacity-90 relative z-10" onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2670';"/>
+          </div>
+
+          <!-- Floating metrics -->
+          <div class="absolute -bottom-8 -right-4 lg:-right-8 flex flex-col sm:flex-row gap-4">
+            
+            <div class="bg-[#0A0A0A]/90 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl flex flex-col hover:-translate-y-1 transition-transform">
+               <span class="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-300 to-emerald-500 font-bricolage font-light tracking-tight counter-value" data-target="300">+0</span>
+               <span class="text-xs text-neutral-400 uppercase tracking-widest mt-1">Municípios Atendidos</span>
+            </div>
+
+            <div class="bg-[#0A0A0A]/90 backdrop-blur-xl border border-white/10 p-5 rounded-2xl shadow-2xl flex flex-col hover:-translate-y-1 transition-transform">
+               <span class="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-300 to-emerald-500 font-bricolage font-light tracking-tight counter-value" data-target="1600">+0</span>
+               <span class="text-xs text-neutral-400 uppercase tracking-widest mt-1">Empresas Ativas</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="space-y-8 mt-12 lg:mt-0">
+          <h2 class="text-4xl md:text-5xl text-white font-bricolage font-light tracking-tight leading-[1.1]">
+            Mais de 20 anos garantindo tranquilidade para empresas mineiras.
+          </h2>
+          <p class="text-base text-neutral-400 leading-relaxed font-sans max-w-lg">
+            Experiência técnica, estrutura sólida e conformidade em cada detalhe. Fundada em 2002, a Colefar nasceu com o propósito de oferecer soluções seguras para o tratamento de resíduos, atendendo rigorosamente às exigências legais.
+          </p>
+          
+          <div class="pt-4 border-t border-white/10">
+            <h4 class="text-sm font-semibold text-emerald-400 uppercase tracking-wider mb-4">Hoje somos referência em Minas Gerais:</h4>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 group cursor-default p-1.5 rounded-xl hover:bg-emerald-500/5 transition-all duration-300 hover:translate-x-1">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 mt-0.5 shrink-0 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.4)] transition-transform"></i>
+                <span class="text-sm text-neutral-300 group-hover:text-emerald-400 transition-colors">Atuação técnica especializada</span>
+              </li>
+              <li class="flex items-start gap-3 group cursor-default p-1.5 rounded-xl hover:bg-emerald-500/5 transition-all duration-300 hover:translate-x-1">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 mt-0.5 shrink-0 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.4)] transition-transform"></i>
+                <span class="text-sm text-neutral-300 group-hover:text-emerald-400 transition-colors">Processos estruturados e auditáveis</span>
+              </li>
+              <li class="flex items-start gap-3 group cursor-default p-1.5 rounded-xl hover:bg-emerald-500/5 transition-all duration-300 hover:translate-x-1">
+                <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-500 mt-0.5 shrink-0 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.4)] transition-transform"></i>
+                <span class="text-sm text-neutral-300 group-hover:text-emerald-400 transition-colors">Atendimento robusto para saúde e indústria</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider"></div>
+    </section>
+
+    <!-- =========================
+         FOLD 3: SERVIÇOS & SEGMENTOS
+    ========================== -->
+    <section id="servicos" class="max-w-7xl mx-auto px-6 py-24 relative z-10 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+      
+      <div class="mb-16 text-center max-w-3xl mx-auto space-y-4">
+        <h2 class="text-4xl md:text-[56px] leading-[1.05] text-white font-bricolage font-light tracking-tight">
+          Soluções completas para<br/> <span class="text-emerald-gradient block mt-2">diferentes tipos de geradores.</span>
+        </h2>
+        <p class="text-lg text-neutral-400 leading-relaxed">
+          Atendimento estruturado para resíduos de saúde e industrial.
+        </p>
+      </div>
+
+      <!-- Custom Toggle -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex bg-neutral-900 border border-white/10 rounded-full p-1" role="group">
+          <button id="btn-saude" onclick="toggleServicos('saude')" class="btn-toggle-pill px-6 py-2 text-sm rounded-full btn-toggle-active transition-all duration-300 tracking-wide">Resíduos de Saúde</button>
+          <button id="btn-ind" onclick="toggleServicos('ind')" class="btn-toggle-pill px-6 py-2 text-sm rounded-full text-neutral-400 hover:text-white transition-all duration-300 tracking-wide">Resíduos Industriais</button>
+        </div>
+      </div>
+
+      <!-- Grid Container (Overlap system for smooth cross-fading) -->
+      <div class="grid grid-cols-1 grid-rows-1 relative">
+      
+      <!-- Grid de Saúde (Exibido) -->
+      <div id="tab-saude" class="col-start-1 row-start-1 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 tab-content-transition transform translate-y-0 opacity-100 z-10">
+        
+        <!-- Standard Card Structure -->
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/hospital.png" alt="" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Clínicas e Centros Oncológicos</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/lab.png" alt="" class="segment-icon--dense" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Laboratórios</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/pill.png" alt="" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Farmácias</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/medical.png" alt="" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Consultórios</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/tooth.png" alt="" class="segment-icon--dense" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Clínicas Odontológicas</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/home.png" alt="" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Home Care</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/sparkle.png" alt="" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Clínicas Estéticas</h4>
+        </div>
+
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+            <img src="assets/icons/paw.png" alt="" class="segment-icon--paw" />
+          </div>
+          <h4 class="text-sm text-neutral-200 font-medium">Veterinárias</h4>
+        </div>
+
+      </div>
+      <!-- Grid de Indústria (Oculto) -->
+      <div id="tab-ind" class="col-start-1 row-start-1 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 tab-content-transition transform translate-y-4 opacity-0 scale-[0.98] blur-sm z-0 pointer-events-none">
+        
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/agro.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Agronegócios</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/auto.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Indústria Automotiva</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/mecan.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Mecânica</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/metal.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Metalúrgica</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/cloth.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Têxtil</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/farma.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Indústria Farmacêutica</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/clinic.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Ambulatórios Industriais</h4>
+        </div>
+        <div class="rounded-2xl border border-white/5 bg-white/5 p-6 hover:bg-white/10 hover:border-white/20 transition-all cursor-default group flex flex-col items-center text-center">
+          <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"><img src="assets/icons/mol.png" alt="" /></div>
+          <h4 class="text-sm text-neutral-200 font-medium">Pequenas e Grandes Indústrias</h4>
+        </div>
+
+      </div>
+      </div> <!-- End Grid Container -->
+
+
+      <div class="mt-12 text-center flex flex-col items-center justify-center space-y-6">
+        
+        <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard px-8 py-3 rounded-full bg-white text-black font-medium hover:bg-neutral-200 transition-colors">
+          Ver solução para minha empresa
+        </button>
+      </div>
+      <div class="section-divider"></div>
+
+    </section>
+
+    <!-- =========================
+         FOLD 4: PROCESSO / TECNOLOGIA
+    ========================== -->
+    <section id="processo" class="max-w-7xl mx-auto px-6 py-24 relative z-10 grid-bg border-t border-white/5 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+      
+      <div class="mb-16 text-center">
+        <h2 class="text-4xl md:text-[52px] leading-[1.05] text-white font-bricolage font-light tracking-tight mb-4">
+          <span class="text-emerald-gradient">Cada resíduo tratado</span><br/>com a tecnologia correta.
+        </h2>
+        <p class="text-lg text-neutral-300/85 leading-relaxed font-sans max-w-2xl mx-auto">
+          Processos licenciados, seguros e auditáveis. Utilizamos as melhores rotas da engenharia ambiental.
+        </p>
+      </div>
+
+      <div class="bg-neutral-900 border border-white/10 rounded-[2rem] overflow-hidden">
+        
+        <div class="flex justify-center px-4 pt-4">
+           <div class="inline-flex w-full max-w-md bg-neutral-900 border border-white/10 rounded-full p-1" role="group">
+              <button id="btn-autoclave" onclick="toggleProcesso('autoclave')" class="btn-toggle-pill flex-1 px-6 py-2 text-center text-sm rounded-full btn-toggle-active transition-all duration-300 tracking-wide">
+                Autoclave
+              </button>
+              <button id="btn-incineracao" onclick="toggleProcesso('incineracao')" class="btn-toggle-pill flex-1 px-6 py-2 text-center text-sm rounded-full text-neutral-400 hover:text-white transition-all duration-300 tracking-wide">
+                Incineração
+              </button>
+           </div>
+        </div>
+
+        <div class="grid grid-cols-1 grid-rows-1 w-full overflow-hidden">
+        
+        <!-- Tab Autoclave -->
+        <div id="tab-autoclave" class="col-start-1 row-start-1 grid grid-cols-1 lg:grid-cols-2 p-8 lg:p-12 gap-12 items-center tab-content-transition transform translate-x-0 opacity-100 z-10 min-h-[500px] lg:min-h-[550px]">
+           
+           <!-- Content -->
+           <div class="space-y-8">
+             <div>
+               <h3 class="text-3xl text-white font-bricolage font-light mb-3">
+                 Sistema de vapor contínuo sob pressão.
+               </h3>
+               <p class="text-sm text-neutral-300/90">
+                 A autoclave neutraliza agentes infecciosos de maneira implacável, removendo todo o risco biológico antes da destinação, preservando o solo e as pessoas.
+               </p>
+             </div>
+
+             <div class="space-y-4">
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/30 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-300 cursor-default group/item">
+                  <i data-lucide="thermometer" class="w-5 h-5 text-emerald-500 group-hover/item:scale-110 transition-transform"></i>
+                  <span class="text-sm text-neutral-200">Vapor sob pressão com ciclo técnico monitorado.</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/30 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-300 cursor-default group/item">
+                  <i data-lucide="biohazard" class="w-5 h-5 text-emerald-500 group-hover/item:scale-110 transition-transform"></i>
+                  <span class="text-sm text-neutral-200">Redução substancial do risco biológico.</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/30 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-300 cursor-default group/item">
+                  <i data-lucide="file-check" class="w-5 h-5 text-emerald-500 group-hover/item:scale-110 transition-transform"></i>
+                  <span class="text-sm text-neutral-200">Rastreabilidade documental do início ao fechamento.</span>
+                </div>
+              </div>
+
+             <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard w-full">
+                Escolher uma gestão segura
+              </button>
+
+           </div>
+
+            <!-- Media -->
+           <div class="relative h-64 lg:h-full min-h-[320px] rounded-2xl overflow-hidden group">
+             <img src="assets/services/banner.jpg" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80" onerror="this.src='https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=2670';" alt="Processo Autoclave" />
+           </div>
+
+         </div>
+        <!-- Tab Incineração -->
+        <div id="tab-incineracao" class="col-start-1 row-start-1 grid grid-cols-1 lg:grid-cols-2 p-8 lg:p-12 gap-12 items-center tab-content-transition transform translate-x-12 opacity-0 scale-[0.98] blur-sm z-0 pointer-events-none min-h-[500px] lg:min-h-[550px]">
+           <!-- Content -->
+           <div class="space-y-8">
+             <div>
+               <h3 class="text-3xl text-white font-bricolage font-light mb-3">
+                 Incineração de Alta Performance.
+               </h3>
+               <p class="text-sm text-neutral-300/90">
+                 Tratamento térmico de ponta para compostos químicos, narcóticos e resíduos industriais perigosos, reduzindo volume e aniquilando a toxicidade.
+               </p>
+             </div>
+
+             <div class="space-y-4">
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/30 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-300 cursor-default group/item">
+                  <i data-lucide="flame" class="w-5 h-5 text-emerald-500 group-hover/item:scale-110 transition-transform"></i>
+                  <span class="text-sm text-neutral-200">Temperaturas superiores a 800°C com dupla câmara.</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/30 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-300 cursor-default group/item">
+                  <i data-lucide="wind" class="w-5 h-5 text-emerald-500 group-hover/item:scale-110 transition-transform"></i>
+                  <span class="text-sm text-neutral-200">Filtros de emissões atmosféricas rigorosamente dentro da lei.</span>
+                </div>
+                <div class="flex items-center gap-3 p-3 rounded-lg border border-white/5 bg-black/30 hover:border-emerald-500/30 hover:bg-emerald-500/5 hover:-translate-y-0.5 transition-all duration-300 cursor-default group/item">
+                  <i data-lucide="shield" class="w-5 h-5 text-emerald-500 group-hover/item:scale-110 transition-transform"></i>
+                  <span class="text-sm text-neutral-200">Eliminação irreversível de dados, produtos e compostos ativos.</span>
+                </div>
+              </div>
+
+             <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard w-full">
+                Escolher uma gestão segura
+              </button>
+
+           </div>
+
+                       <!-- Media -->
+           <div class="relative h-64 lg:h-full min-h-[320px] rounded-2xl overflow-hidden group">
+             <!-- Using generic factory fire image API as placeholder -->
+             <img src="assets/services/banner2.jpeg" class="absolute inset-0 w-full h-full object-cover grayscale-[30%] opacity-80" alt="Processo Incineração" />
+           </div>
+        </div>
+          </div> <!-- End tab-content-grid -->
+      </div> <!-- End processo-card-container -->
+
+    </section>
+
+    <!-- =========================
+         FOLD 5: REGULARIZAÇÃO
+    ========================== -->
+    <section id="regularizacao" class="max-w-7xl mx-auto px-6 py-24 relative z-10 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+       <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <h2 class="text-4xl md:text-[56px] leading-[1.05] text-white font-bricolage font-light tracking-tight">
+          Você gera o resíduo.<br/> <span class="text-emerald-gradient">Nós garantimos o destino correto.</span>
+        </h2>
+        <p class="text-lg text-neutral-300/85 leading-relaxed font-sans mt-4">
+          Um processo simples, seguro e 100% conforme a legislação.
+        </p>
+      </div>
+
+      <!-- Steps Flow Layout -->
+      <div class="relative">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-5 regularizacao-grid relative z-10">
+          
+          <article class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--emerald h-full transform hover:-translate-y-1 transition-all duration-300 group">
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 lg:p-8 flex flex-col">
+              <div class="regularizacao-step-icon mb-6">
+                <i data-lucide="file-signature" class="w-6 h-6 text-emerald-500"></i>
+              </div>
+              <h4 class="text-white font-bricolage text-xl mb-3">Cadastro e MTR</h4>
+              <p class="text-sm text-neutral-400 leading-relaxed font-sans">Cadastro no sistema MTR e emissão gratuita do manifesto legal antes de toda a coleta.</p>
+            </div>
+          </article>
+
+          <article class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--emerald h-full transform hover:-translate-y-1 transition-all duration-300 group">
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 lg:p-8 flex flex-col">
+              <div class="regularizacao-step-icon mb-6">
+                <i data-lucide="truck" class="w-6 h-6 text-emerald-500"></i>
+              </div>
+              <h4 class="text-white font-bricolage text-xl mb-3">Coleta Licenciada</h4>
+              <p class="text-sm text-neutral-400 leading-relaxed font-sans">Coleta com frota veicular totalmente licenciada e transporte regulamentado pelos órgãos restritos.</p>
+            </div>
+          </article>
+
+          <article class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--emerald h-full transform hover:-translate-y-1 transition-all duration-300 group">
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 lg:p-8 flex flex-col">
+              <div class="regularizacao-step-icon mb-6">
+                <i data-lucide="wind" class="w-6 h-6 text-emerald-500"></i>
+              </div>
+              <h4 class="text-white font-bricolage text-xl mb-3">Tratamento Correto</h4>
+              <p class="text-sm text-neutral-400 leading-relaxed font-sans">Solução e destruição do material baseando-se especificamente no tipo orgânico e químico do resíduo gerado.</p>
+            </div>
+          </article>
+
+          <article class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--emerald h-full transform hover:-translate-y-1 transition-all duration-300 group">
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 lg:p-8 flex flex-col">
+              <div class="regularizacao-step-icon mb-6">
+                <i data-lucide="award" class="w-6 h-6 text-emerald-500"></i>
+              </div>
+              <h4 class="text-white font-bricolage text-xl mb-3">Certificação Final</h4>
+              <p class="text-sm text-neutral-400 leading-relaxed font-sans">Emissão do certificado final CDF, encerrando toda a sua cadeia de obrigações legais com o ambiente.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="mt-16 flex justify-center">
+        <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard ">
+          Quero minha operação 100% regularizada
+        </button>
+      </div>
+      <div class="section-divider"></div>
+
+    </section>
+
+    <!-- =========================
+         FOLD 6: RISCOS (ELECTRIC CARDS)
+    ========================== -->
+    <section id="riscos" class="max-w-7xl mx-auto px-6 py-24 relative z-10 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Shield Info -->
+        <div class="lg:col-span-5 relative space-y-6">
+          
+          <h2 class="text-3xl md:text-5xl text-white font-bricolage font-light tracking-tight leading-[1.05]">
+            <span class="text-warning-gradient">Evite multas,</span> interdições e problemas legais.
+          </h2>
+          <p class="text-sm text-neutral-400 leading-relaxed font-sans">
+            Uma gestão inadequada de resíduos possui um custo sombrio gerando consequências irrecuperáveis para a sua empresa.
+          </p>
+
+          <div class="pt-2">
+            <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard ">
+              Falar com um especialista em gestão
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Risks Grid -->
+        <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <div class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--warning h-full transform hover:-translate-y-1 transition-all duration-300">
+            <div class="absolute inset-0 bg-gradient-to-b from-red-500/30 via-transparent to-transparent opacity-60 z-0 rounded-3xl"></div>
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 flex flex-col">
+              <i data-lucide="landmark" class="w-6 h-6 text-red-500 mb-4"></i>
+              <h4 class="text-lg text-white mb-2 font-bricolage">Multas ambientais elevadas</h4>
+              <p class="text-xs text-neutral-400">Irregularidades no descarte podem gerar penalidades financeiras pesadas e recorrentes.</p>
+            </div>
+          </div>
+
+          <div class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--warning h-full transform hover:-translate-y-1 transition-all duration-300">
+            <div class="absolute inset-0 bg-gradient-to-b from-orange-500/30 via-transparent to-transparent opacity-60 z-0 rounded-3xl"></div>
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 flex flex-col">
+              <i data-lucide="octagon-alert" class="w-6 h-6 text-orange-500 mb-4"></i>
+              <h4 class="text-lg text-white mb-2 font-bricolage">Interdição das atividades</h4>
+              <p class="text-xs text-neutral-400">Sua operação pode ser suspensa até a regularização, impactando faturamento e continuidade.</p>
+            </div>
+          </div>
+
+          <div class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--warning h-full transform hover:-translate-y-1 transition-all duration-300">
+            <div class="absolute inset-0 bg-gradient-to-b from-red-600/30 via-transparent to-transparent opacity-60 z-0 rounded-3xl"></div>
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 flex flex-col">
+              <i data-lucide="gavel" class="w-6 h-6 text-red-600 mb-4"></i>
+              <h4 class="text-lg text-white mb-2 font-bricolage">Responsabilização civil e criminal</h4>
+              <p class="text-xs text-neutral-400">A empresa e os responsáveis podem responder legalmente por falhas na gestão de resíduos.</p>
+            </div>
+          </div>
+
+          <div class="relative bg-neutral-900 rounded-3xl p-[1px] card-glow--warning h-full transform hover:-translate-y-1 transition-all duration-300">
+            <div class="absolute inset-0 bg-gradient-to-b from-orange-400/20 via-transparent to-transparent opacity-60 z-0 rounded-3xl"></div>
+            <div class="relative z-10 bg-[#0A0A0A] rounded-[30px] h-full p-6 flex flex-col">
+              <i data-lucide="message-square-off" class="w-6 h-6 text-orange-400 mb-4"></i>
+              <h4 class="text-lg text-white mb-2 font-bricolage">Danos à reputação</h4>
+              <p class="text-xs text-neutral-400">Problemas ambientais comprometem a imagem da empresa perante clientes e órgãos reguladores.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      
+      <div class="section-divider-warning"></div>
+
+    </section>
+
+    <!-- =========================
+         FOLD 7: PROTEÇÃO (CTA)
+    ========================== -->
+    <section id="protecao" class="border-t border-white/5 bg-gradient-to-b from-transparent to-emerald-950/20 py-24 relative z-10 [animation:animationIn_0.8s_ease-out_0.1s_both] animate-on-scroll">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+        
+        <h2 class="text-5xl md:text-6xl text-white font-bricolage font-light tracking-tight mb-4">
+          Sua empresa está<br/>realmente protegida?
+        </h2>
+        <p class="text-xl text-neutral-300/90 mb-12">A regularização não pode esperar.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-16">
+          <div class="protecao-feature-card">
+            <div class="protecao-feature-icon">
+              <i data-lucide="layout-list"></i>
+            </div>
+            <h4>Soluções ajustadas à sua realidade</h4>
+            <p>Planejamento definido conforme o tipo de resíduo, volume gerado e dinâmica da sua operação.</p>
+          </div>
+          <div class="protecao-feature-card">
+            <div class="protecao-feature-icon">
+              <i data-lucide="briefcase"></i>
+            </div>
+            <h4>Atendimento especializado para o seu segmento</h4>
+            <p>Abordagem técnica alinhada às exigências legais e particularidades do seu setor.</p>
+          </div>
+          <div class="protecao-feature-card">
+            <div class="protecao-feature-icon">
+              <i data-lucide="zap"></i>
+            </div>
+            <h4>Estrutura pronta para início imediato</h4>
+            <p>Operação estruturada para iniciar com rapidez, sem burocracia e com total segurança.</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center gap-6">
+
+          <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard btn-sweep mx-auto px-10 py-4 text-base font-semibold text-black bg-white rounded-full hover:bg-emerald-50 transition-colors flex items-center gap-2 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            QUERO MINHA PROPOSTA <i data-lucide="arrow-right" class="w-4 h-4 text-emerald-500"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="border-t border-white/5 py-8 bg-[#050505] relative z-10 w-full">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center opacity-80 hover:opacity-100 transition-opacity">
+        <img src="assets/logo-white.png" alt="Colefar Logo" class="h-6 w-auto" />
+      </div>
+      <p class="text-xs text-neutral-600">© 2026 Colefar - Todos os direitos reservados.</p>
+      <a href="#inicio" class="text-xs text-neutral-400 hover:text-white px-4 py-2 border border-white/10 rounded-full transition-colors flex items-center gap-2">
+        <i data-lucide="arrow-up" class="w-3 h-3"></i> Ir ao topo
+      </a>
+    </div>
+  </footer>
+
+  <!-- =========================
+       PROPOSAL MODAL
+  ========================== -->
+  <div id="proposal-modal" class="fixed inset-0 z-[100] flex items-center justify-center invisible opacity-0 transition-all duration-300">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer" onclick="this.parentElement.classList.add('invisible', 'opacity-0');"></div>
+    
+    <!-- Dialog -->
+    <div class="relative w-full max-w-lg bg-neutral-900 border border-white/10 rounded-3xl shadow-2xl p-8 m-4 transform transition-all data-[state=open]:scale-100 scale-95 electric-card">
+      
+      <!-- Close Btn -->
+      <button onclick="document.getElementById('proposal-modal').classList.add('invisible', 'opacity-0');" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+
+      <h2 class="text-2xl text-white font-bricolage font-light mb-2">Evite riscos antes que eles virem problema.</h2>
+      <p class="text-xs text-neutral-400 mb-6">Preencha seus dados e fale com nosso time para receber uma proposta sob medida, com segurança jurídica e operação 100% regularizada.</p>
+
+      <form id="proposal-form" action="/api/send-proposal" method="POST" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-xs text-neutral-500 mb-1 block">Razão social</span>
+            <input type="text" name="razao_social" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Empresa ou organização" required>
+          </label>
+          <label class="block">
+            <span class="text-xs text-neutral-500 mb-1 block">Nome</span>
+            <input type="text" name="nome" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Responsável pelo contato" required>
+          </label>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-xs text-neutral-500 mb-1 block">CPF ou CNPJ</span>
+            <input type="text" name="cpf_cnpj" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="00.000.000/0000-00" required>
+          </label>
+          <label class="block">
+            <span class="text-xs text-neutral-500 mb-1 block">Telefone</span>
+            <input type="tel" name="telefone" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="(00) 00000-0000" required>
+          </label>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-xs text-neutral-500 mb-1 block">Cidade</span>
+            <input type="text" name="cidade" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Cidade / UF" required>
+          </label>
+          <label class="block">
+            <span class="text-xs text-neutral-500 mb-1 block">Segmento</span>
+            <input type="text" name="segmento" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Saúde, indústria, comércio..." required>
+          </label>
+        </div>
+
+        <label class="block">
+          <span class="text-xs text-neutral-500 mb-1 block">Email</span>
+          <input type="email" name="email" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="voce@empresa.com.br" required>
+        </label>
+
+        <div class="pt-4">
+          <button type="submit" class="btn-cta-standard w-full btn-sweep px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-medium hover:brightness-110 shadow-lg transition-all flex items-center justify-center gap-2 uppercase tracking-wider">
+            <i data-lucide="send" class="w-4 h-4"></i> Enviar
+          </button>
+          <p id="proposal-form-status" class="text-[10px] text-neutral-500 text-center mt-3" aria-live="polite">Seus dados serão enviados com segurança para a equipe comercial.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Intialize Lucide Icons and Scroll Animations -->
+  <script>
+    
+    // Tab switching logic
+    function toggleServicos(tab) {
+      const btnSaude = document.getElementById('btn-saude');
+      const btnInd = document.getElementById('btn-ind');
+      const tabSaude = document.getElementById('tab-saude');
+      const tabInd = document.getElementById('tab-ind');
+      
+      const activeBtn = ["btn-toggle-active"];
+      const inactiveBtn = "text-neutral-400 hover:text-white".split(" ");
+      
+        if (tab === 'saude') {
+          btnSaude.classList.remove(...inactiveBtn);
+          btnSaude.classList.add(...activeBtn);
+          btnInd.classList.remove(...activeBtn);
+          btnInd.classList.add(...inactiveBtn);
+          
+          tabInd.classList.add('opacity-0', 'translate-y-4', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+          tabInd.classList.remove('translate-y-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+          
+          tabSaude.classList.remove('opacity-0', 'translate-y-4', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+          tabSaude.classList.add('translate-y-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+        } else {
+          btnInd.classList.remove(...inactiveBtn);
+          btnInd.classList.add(...activeBtn);
+          btnSaude.classList.remove(...activeBtn);
+          btnSaude.classList.add(...inactiveBtn);
+          
+          tabSaude.classList.add('opacity-0', 'translate-y-4', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+          tabSaude.classList.remove('translate-y-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+          
+          tabInd.classList.remove('opacity-0', 'translate-y-4', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+          tabInd.classList.add('translate-y-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+        }
+      
+      // refresh lucide icons for newly displayed
+      lucide.createIcons();
+    }
+
+    function toggleProcesso(tab) {
+      const btnA = document.getElementById('btn-autoclave');
+      const btnI = document.getElementById('btn-incineracao');
+      const tabA = document.getElementById('tab-autoclave');
+      const tabI = document.getElementById('tab-incineracao');
+      
+      const activeClasses = ["btn-toggle-active"];
+      const inactiveClasses = ["text-neutral-500", "hover:text-white"];
+      
+      if (tab === 'autoclave') {
+        btnA.classList.remove(...inactiveClasses);
+        btnA.classList.add(...activeClasses);
+        btnI.classList.add(...inactiveClasses);
+        btnI.classList.remove(...activeClasses);
+
+        tabI.classList.add('opacity-0', 'translate-x-12', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+        tabI.classList.remove('translate-x-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+        
+        tabA.classList.remove('opacity-0', '-translate-x-12', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+        tabA.classList.add('translate-x-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+      } else {
+        btnI.classList.remove(...inactiveClasses);
+        btnI.classList.add(...activeClasses);
+        btnA.classList.add(...inactiveClasses);
+        btnA.classList.remove(...activeClasses);
+
+        tabA.classList.add('opacity-0', '-translate-x-12', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+        tabA.classList.remove('translate-x-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+        
+        tabI.classList.remove('opacity-0', 'translate-x-12', 'scale-[0.98]', 'blur-sm', 'pointer-events-none', 'z-0');
+        tabI.classList.add('translate-x-0', 'scale-100', 'blur-0', 'opacity-100', 'z-10');
+      }
+      
+      lucide.createIcons();
+    }
+
+    lucide.createIcons();
+
+    // Setup intersection observer for entry animations imitating the Design System
+    document.addEventListener("DOMContentLoaded", () => {
+      const proposalForm = document.getElementById("proposal-form");
+      if (proposalForm) {
+        const status = document.getElementById("proposal-form-status");
+        const submitButton = proposalForm.querySelector('button[type="submit"]');
+        const defaultButtonContent = submitButton ? submitButton.innerHTML : "";
+        const ajaxEndpoint = proposalForm.getAttribute("action");
+
+        proposalForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const payload = Object.fromEntries(new FormData(proposalForm).entries());
+
+          if (status) {
+            status.textContent = "Enviando seus dados para a equipe comercial...";
+            status.className = "text-[10px] text-emerald-300 text-center mt-3";
+          }
+
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.classList.add("opacity-70", "cursor-wait");
+            submitButton.innerHTML = "Enviando...";
+          }
+
+          try {
+            const response = await fetch(ajaxEndpoint, {
+              method: "POST",
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest"
+              },
+              body: JSON.stringify(payload)
+            });
+
+            let result = {};
+            try {
+              result = await response.json();
+            } catch (parseError) {
+              result = {};
+            }
+
+            if (!response.ok || result.ok === false) {
+              throw new Error(result.message || "Email service returned an error.");
+            }
+
+            proposalForm.reset();
+
+            if (status) {
+              status.textContent = "Recebemos seus dados. Nossa equipe comercial entrará em contato.";
+              status.className = "text-[10px] text-emerald-300 text-center mt-3";
+            }
+          } catch (error) {
+            if (status) {
+              status.textContent = "Nao foi possivel enviar agora. Tente novamente em alguns instantes.";
+              status.className = "text-[10px] text-red-300 text-center mt-3";
+            }
+          } finally {
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.classList.remove("opacity-70", "cursor-wait");
+              submitButton.innerHTML = defaultButtonContent;
+              lucide.createIcons();
+            }
+          }
+        });
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -10% 0px" });
+
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Simple Counter Animation Logic
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const target = parseInt(el.getAttribute('data-target'));
+            let current = 0;
+            const duration = 2000;
+            const start = performance.now();
+            
+            function update(timestamp) {
+              const elapsed = timestamp - start;
+              const progress = Math.min(elapsed / duration, 1);
+              
+              // Easing out function
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const val = Math.floor(easeOut * target);
+              el.innerText = `+${val}`;
+              
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                el.innerText = `+${target}`;
+              }
+            }
+            requestAnimationFrame(update);
+          } else {
+            // Reset for "every time we pass by"
+            entry.target.innerText = "+0";
+          }
+        });
+      }, { threshold: 0.5 });
+
+      document.querySelectorAll('.counter-value').forEach(counter => {
+        counterObserver.observe(counter);
+      });
+    });
+  </script>
+
+</body>
+</html>
