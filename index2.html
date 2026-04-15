@@ -286,6 +286,28 @@
     }
     
     .animate-entry { animation: fadeInUpBlur 1s cubic-bezier(0.2,0.8,0.2,1) both; }
+
+    /* Modal Status Transition Animations */
+    @keyframes statusScaleIn {
+      0% { opacity: 0; transform: scale(0.9); filter: blur(10px); }
+      100% { opacity: 1; transform: scale(1); filter: blur(0); }
+    }
+    
+    .status-panel-animate {
+      animation: statusScaleIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    @keyframes checkDraw {
+      0% { stroke-dashoffset: 60; opacity: 0; }
+      30% { opacity: 1; }
+      100% { stroke-dashoffset: 0; }
+    }
+
+    .success-check {
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: checkDraw 0.6s 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
     .delay-75 { animation-delay: 75ms; }
     .delay-150 { animation-delay: 150ms; }
     .delay-200 { animation-delay: 200ms; }
@@ -1342,12 +1364,12 @@
       
       <div class="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent top-0"></div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
         <!-- Media / Metrics -->
-        <div class="relative group">
-          <div class="p-2 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-sm relative overflow-hidden">
+        <div class="relative group h-full">
+          <div class="p-2 rounded-[2rem] border border-white/5 bg-white/5 backdrop-blur-sm relative overflow-hidden h-full">
              <!-- The Image -->
-             <img src="assets/about-colefar.jpg" alt="Equipe Colefar" class="rounded-[1.5rem] w-full aspect-[4/3] object-cover grayscale-[30%] opacity-90 relative z-10" onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2670';"/>
+             <img src="assets/about-colefar.jpg" alt="Equipe Colefar" class="rounded-[1.5rem] w-full h-full object-cover grayscale-[30%] opacity-90 relative z-10" onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&q=80&w=2670';"/>
           </div>
 
           <!-- Floating metrics -->
@@ -1391,6 +1413,12 @@
                 <span class="text-sm text-neutral-300 group-hover:text-emerald-400 transition-colors">Atendimento robusto para saúde e indústria</span>
               </li>
             </ul>
+            
+            <div class="mt-8">
+               <button onclick="document.getElementById('proposal-modal').classList.remove('invisible', 'opacity-0');" class="btn-cta-standard px-10">
+                  <span>Falar com especialista</span>
+               </button>
+            </div>
           </div>
         </div>
       </div>
@@ -1855,65 +1883,76 @@
   ========================== -->
   <div id="proposal-modal" class="fixed inset-0 z-[100] flex items-center justify-center invisible opacity-0 transition-all duration-300">
     <!-- Backdrop -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer" onclick="this.parentElement.classList.add('invisible', 'opacity-0');"></div>
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer" onclick="closeProposalModal()"></div>
     
     <!-- Dialog -->
-    <div class="relative w-full max-w-lg bg-neutral-900 border border-white/10 rounded-3xl shadow-2xl p-8 m-4 transform transition-all data-[state=open]:scale-100 scale-95 electric-card">
+    <div class="relative w-full max-w-lg bg-neutral-900 border border-white/10 rounded-3xl shadow-2xl p-8 m-4 transform transition-all data-[state=even]:scale-100 scale-95 electric-card">
       
       <!-- Close Btn -->
-      <button onclick="document.getElementById('proposal-modal').classList.add('invisible', 'opacity-0');" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors">
+      <button onclick="closeProposalModal()" class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-colors z-[110]">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
 
-      <h2 class="text-2xl text-white font-bricolage font-light mb-2">Evite riscos antes que eles virem problema.</h2>
-      <p class="text-xs text-neutral-400 mb-6">Preencha seus dados e fale com nosso time para receber uma proposta sob medida, com segurança jurídica e operação 100% regularizada.</p>
+      <!-- Content Wrapper to toggle -->
+      <div id="modal-form-content" class="transition-all duration-500 opacity-100">
+        <h2 class="text-2xl text-white font-bricolage font-light mb-2">Evite riscos antes que eles virem problema.</h2>
+        <p class="text-xs text-neutral-400 mb-6">Preencha seus dados e fale com nosso time para receber uma proposta sob medida, com segurança jurídica e operação 100% regularizada.</p>
 
-      <form id="proposal-form" action="/api/send-proposal" method="POST" class="space-y-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form id="proposal-form" action="/api/send-proposal" method="POST" class="space-y-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-xs text-neutral-500 mb-1 block">Razão social</span>
+              <input type="text" name="razao_social" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Empresa" required>
+            </label>
+            <label class="block">
+              <span class="text-xs text-neutral-500 mb-1 block">Nome</span>
+              <input type="text" name="nome" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Contato" required>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-xs text-neutral-500 mb-1 block">CPF ou CNPJ</span>
+              <input type="text" name="cpf_cnpj" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="CPF/CNPJ" required>
+            </label>
+            <label class="block">
+              <span class="text-xs text-neutral-500 mb-1 block">Telefone</span>
+              <input type="tel" name="telefone" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="(00) 00000-0000" required>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label class="block">
+              <span class="text-xs text-neutral-500 mb-1 block">Cidade</span>
+              <input type="text" name="cidade" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Cidade/UF" required>
+            </label>
+            <label class="block">
+              <span class="text-xs text-neutral-500 mb-1 block">Segmento</span>
+              <input type="text" name="segmento" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Segmento" required>
+            </label>
+          </div>
+
           <label class="block">
-            <span class="text-xs text-neutral-500 mb-1 block">Razão social</span>
-            <input type="text" name="razao_social" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Empresa" required>
+            <span class="text-xs text-neutral-500 mb-1 block">Email</span>
+            <input type="email" name="email" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="voce@empresa.com.br" required>
           </label>
-          <label class="block">
-            <span class="text-xs text-neutral-500 mb-1 block">Nome</span>
-            <input type="text" name="nome" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Contato" required>
-          </label>
+
+          <div class="pt-4">
+            <button type="submit" class="btn-cta-standard w-full btn-sweep px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-medium hover:brightness-110 shadow-lg transition-all flex items-center justify-center gap-2 uppercase tracking-wider">
+              <i data-lucide="send" class="w-4 h-4"></i> Enviar
+            </button>
+            <p id="proposal-form-status" class="text-[10px] text-neutral-500 text-center mt-3" aria-live="polite">Seus dados serão enviados com segurança para a equipe comercial.</p>
+          </div>
+        </form>
+      </div>
+
+      <div id="modal-status-content" class="hidden flex-col items-center justify-center text-center py-6 status-panel-animate">
+        <div id="status-icon" class="mb-6 relative">
+          <!-- Icon will be injected here -->
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label class="block">
-            <span class="text-xs text-neutral-500 mb-1 block">CPF ou CNPJ</span>
-            <input type="text" name="cpf_cnpj" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="CPF/CNPJ" required>
-          </label>
-          <label class="block">
-            <span class="text-xs text-neutral-500 mb-1 block">Telefone</span>
-            <input type="tel" name="telefone" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="(00) 00000-0000" required>
-          </label>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label class="block">
-            <span class="text-xs text-neutral-500 mb-1 block">Cidade</span>
-            <input type="text" name="cidade" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Cidade/UF" required>
-          </label>
-          <label class="block">
-            <span class="text-xs text-neutral-500 mb-1 block">Segmento</span>
-            <input type="text" name="segmento" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="Segmento" required>
-          </label>
-        </div>
-
-        <label class="block">
-          <span class="text-xs text-neutral-500 mb-1 block">Email</span>
-          <input type="email" name="email" class="w-full bg-black/50 border border-white/10 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-neutral-600 outline-none transition-all" placeholder="voce@empresa.com.br" required>
-        </label>
-
-        <div class="pt-4">
-          <button type="submit" class="btn-cta-standard w-full btn-sweep px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-medium hover:brightness-110 shadow-lg transition-all flex items-center justify-center gap-2 uppercase tracking-wider">
-            <i data-lucide="send" class="w-4 h-4"></i> Enviar
-          </button>
-          <p id="proposal-form-status" class="text-[10px] text-neutral-500 text-center mt-3" aria-live="polite">Seus dados serão enviados com segurança para a equipe comercial.</p>
-        </div>
-      </form>
+        <h3 id="status-title" class="text-2xl text-white font-bricolage font-light mb-3">Mensagem</h3>
+        <p id="status-msg" class="text-sm text-neutral-400 mb-2 max-w-xs mx-auto">Detalhes do status aqui.</p>
+      </div>
     </div>
   </div>
 
@@ -1996,8 +2035,32 @@
 
     lucide.createIcons();
 
+    // Global Modal Functions
+    function closeProposalModal() {
+      const modal = document.getElementById('proposal-modal');
+      const formDiv = document.getElementById('modal-form-content');
+      const statusDiv = document.getElementById('modal-status-content');
+      
+      modal.classList.add('invisible', 'opacity-0');
+      
+      // Reset state after transition
+      setTimeout(() => {
+        formDiv.classList.remove('hidden', 'opacity-0');
+        statusDiv.classList.add('hidden');
+        statusDiv.classList.remove('flex');
+        document.getElementById('proposal-form').reset();
+        
+        const status = document.getElementById("proposal-form-status");
+        if (status) {
+           status.textContent = "Seus dados serão enviados com segurança para a equipe comercial.";
+           status.className = "text-[10px] text-neutral-500 text-center mt-3";
+        }
+      }, 400);
+    }
+
     // Setup intersection observer for entry animations imitating the Design System
     document.addEventListener("DOMContentLoaded", () => {
+
       const proposalForm = document.getElementById("proposal-form");
       if (proposalForm) {
         const status = document.getElementById("proposal-form-status");
@@ -2032,28 +2095,15 @@
               body: JSON.stringify(payload)
             });
 
-            let result = {};
-            try {
-              result = await response.json();
-            } catch (parseError) {
-              result = {};
-            }
-
-            if (!response.ok || result.ok === false) {
-              throw new Error(result.message || "Email service returned an error.");
-            }
-
+            if (!response.ok) throw new Error("Falha no envio");
+            
+            // Success State
+            showModalStatus(true);
             proposalForm.reset();
 
-            if (status) {
-              status.textContent = "Recebemos seus dados. Nossa equipe comercial entrará em contato.";
-              status.className = "text-[10px] text-emerald-300 text-center mt-3";
-            }
           } catch (error) {
-            if (status) {
-              status.textContent = "Nao foi possivel enviar agora. Tente novamente em alguns instantes.";
-              status.className = "text-[10px] text-red-300 text-center mt-3";
-            }
+            // Error State
+            showModalStatus(false);
           } finally {
             if (submitButton) {
               submitButton.disabled = false;
@@ -2063,6 +2113,46 @@
             }
           }
         });
+      }
+
+      function showModalStatus(isSuccess) {
+        const formDiv = document.getElementById('modal-form-content');
+        const statusDiv = document.getElementById('modal-status-content');
+        const statusTitle = document.getElementById('status-title');
+        const statusMsg = document.getElementById('status-msg');
+        const statusIcon = document.getElementById('status-icon');
+
+        // Hide form with transition
+        formDiv.classList.add('opacity-0');
+        
+        setTimeout(() => {
+          formDiv.classList.add('hidden');
+          statusDiv.classList.remove('hidden');
+          statusDiv.classList.add('flex');
+
+          if (isSuccess) {
+            statusTitle.textContent = "Enviado com sucesso!";
+            statusMsg.textContent = "Recebemos sua solicitação. Em breve nossa equipe entrará em contato.";
+            statusIcon.innerHTML = `
+              <div class="absolute inset-0 bg-emerald-500/20 blur-2xl rounded-full"></div>
+              <svg width="80" height="80" viewBox="0 0 96 96" fill="none" class="relative">
+                <circle cx="48" cy="48" r="46" stroke="rgba(16,185,129,0.2)" stroke-width="2"/>
+                <circle cx="48" cy="48" r="38" fill="rgba(16,185,129,0.1)" stroke="#10b981" stroke-width="2"/>
+                <polyline class="success-check" points="30,50 43,63 66,36" stroke="#10b981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            `;
+          } else {
+            statusTitle.textContent = "O envio falhou";
+            statusMsg.textContent = "Não foi possível enviar seus dados agora. Por favor, tente novamente mais tarde.";
+            statusIcon.innerHTML = `
+              <div class="absolute inset-0 bg-red-500/20 blur-2xl rounded-full"></div>
+              <div class="w-20 h-20 rounded-full border-2 border-red-500/30 flex items-center justify-center bg-red-500/10 relative">
+                <i data-lucide="x-circle" class="w-10 h-10 text-red-500"></i>
+              </div>
+            `;
+            lucide.createIcons();
+          }
+        }, 500);
       }
 
       const observer = new IntersectionObserver((entries) => {
